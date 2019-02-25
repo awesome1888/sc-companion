@@ -10,7 +10,7 @@
     "build.client.dev": "webpack --config webpack.client.js --mode development --watch",
     "test.u": "jest -c ./jest/config.unit.js --forceExit"
   },
-  "keywords": [],
+  "keywords": ['styled-components', 'mixin', 'addon'],
   "author": "gannochenko.sv@gmail.com",
   "license": "MIT",
   "repository": {
