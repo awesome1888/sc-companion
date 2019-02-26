@@ -186,7 +186,9 @@ export const group = (params = {}) => {
   `;
 };
 
-export const central = (maxWidth = '960px') => {
+export const central = (params = {}) => {
+  let { maxWidth } = params;
+  maxWidth = maxWidth || '960px';
   return `
     margin-left: auto;
     margin-right: auto;
@@ -207,7 +209,12 @@ export const fontMaterialIcons = () => {
   `;
 };
 
-export const icon = (code = '', size = 'inherit', offset = 0) => {
+export const icon = (params = {}) => {
+  let { code, size, offset } = params;
+  code = code || '';
+  size = size || 'inherit';
+  offset = offset || 0;
+
   return `
     height: ${size};
 	  width: ${size};
@@ -246,14 +253,22 @@ export const fontReset = () => {
   `;
 };
 
-export const iconLabel = (
-  code = 'help',
-  size = 'inherit',
-  iconVAlignment = 'baseline',
-  iconHAlignment = 0,
-  iconWidth = 'auto',
-  distance = 0,
-) => {
+export const iconLabel = (props = {}) => {
+  let {
+    code,
+    size,
+    iconVAlignment,
+    iconHAlignment,
+    iconWidth,
+    distance,
+  } = props;
+  code = code || 'help';
+  size = size || 'inherit';
+  iconVAlignment = iconVAlignment || 'baseline';
+  iconHAlignment = iconHAlignment || 0;
+  iconWidth = iconWidth || 'auto';
+  distance = distance || 0;
+
   return `
     ${flex()}
     ${iconVAlignment === 'baseline' ? flexAlignItems('baseline') : ''} 
@@ -305,17 +320,20 @@ export const helvetica = () => {
   `;
 };
 
-// export const fColor = (color = 'inherit', hColor = null, transitionTime = 0) => {
-//   return `
-//     color: ${color};
-//     &:focus, &:active {
-//       color: $color;
-//     }
-//
-//
-//   `;
-// };
-//
+export const fColor = (props = {}) => {
+  let { color, hColor, transitionTime } = props;
+  color = color || 'inherit';
+  hColor = hColor || null;
+  transitionTime = transitionTime || 0;
+
+  return `
+    color: ${color};
+    &:focus, &:active {
+      color: $color;
+    }
+  `;
+};
+
 // @mixin rb-color($color: inherit, $h-color: $color, $transition-time: 0) {
 //   color: $color;
 //
@@ -332,7 +350,7 @@ export const helvetica = () => {
 //   @include rb-transition(color, $transition-time);
 //   }
 // }
-//
+
 // @mixin rb-dashed-underline($mode: hover, $thickness: 1px, $color: currentcolor, $transition-time: 0) {
 // @if $mode == hover {
 //     border: 0 none;
@@ -406,7 +424,7 @@ export const helvetica = () => {
 //   }
 // }
 
-// @mixin rb-transition($what: all, $duration: 200ms) {
+// transition($what: all, $duration: 200ms) {
 //   transition: $what $duration ease;
 //   -webkit-transition: $what $duration ease;
 // }
