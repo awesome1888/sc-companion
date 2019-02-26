@@ -1,4 +1,9 @@
-const pInt = (val) => {
+/**
+ * Converts a numeric value into int
+ * @param val
+ * @returns {number}
+ */
+const pInt = val => {
   let iVal = parseInt(val, 10);
   if (isNaN(iVal)) {
     iVal = 0;
@@ -7,12 +12,21 @@ const pInt = (val) => {
   return iVal;
 };
 
+/**
+ * Performs an operation on val by applying a function
+ * @param val
+ * @param fn
+ * @returns {*}
+ */
 export const op = (val, fn) => {
   if (typeof val === 'undefined') {
     return val;
   }
 
-  const f = val.toString().trim().match(/^(\d+)?(.(\d+))?(px|rem|em)?$/i);
+  const f = val
+    .toString()
+    .trim()
+    .match(/^(\d+)?(.(\d+))?(px|rem|em)?$/i);
   if (f.length) {
     const full = pInt(f[1]);
     const frac = pInt(f[3]);
@@ -148,21 +162,29 @@ export const rectangle = (params = {}) => {
     width: ${x};
     height: ${y};
   `;
-}
+};
 
-export const group = (w = 0, h = 0) => {
-  const negW = op(w, v => -1 * v);
-  const negH = op(h, v => -1 * v);
+export const group = (params = {}) => {
+  let { x, y } = params;
+  if (typeof x === 'undefined') {
+    x = 0;
+  }
+  if (typeof y === 'undefined') {
+    y = 0;
+  }
+
+  const negW = op(y, v => -1 * v);
+  const negH = op(x, v => -1 * v);
   return `
     & > * {
-      margin-bottom: ${h};
-      margin-right: ${w};
+      margin-bottom: ${y};
+      margin-right: ${x};
     }
 
     margin-bottom: ${negH};
     margin-right: ${negW};
   `;
-}
+};
 
 export const central = (maxWidth = '960px') => {
   return `
@@ -214,7 +236,6 @@ export const mirror = (params = {}) => {
   `;
 };
 
-
 export const fontReset = () => {
   return `
     font-style: normal;
@@ -225,9 +246,14 @@ export const fontReset = () => {
   `;
 };
 
-export const iconLabel = (code = 'help', size = 'inherit', iconVAlignment = 'baseline', iconHAlignment = 0, iconWidth = 'auto', distance = 0) => {
-
-
+export const iconLabel = (
+  code = 'help',
+  size = 'inherit',
+  iconVAlignment = 'baseline',
+  iconHAlignment = 0,
+  iconWidth = 'auto',
+  distance = 0,
+) => {
   return `
     ${flex()}
     ${iconVAlignment === 'baseline' ? flexAlignItems('baseline') : ''} 
@@ -320,10 +346,6 @@ export const helvetica = () => {
 //   @include rb-transition(border-color, $transition-time);
 //   }
 // }
-
-
-
-
 
 // @mixin rb-bg-color($color: inherit, $h-color: false, $f-color: false, $transition-time: 0) {
 //   background-color: $color;

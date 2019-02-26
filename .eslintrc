@@ -27,8 +27,7 @@
   },
   "globals": {
     "__DEV__": true,
-    "__TEST__": true,
-    "logger": true
+    "__TEST__": true
   },
   "env": {
     "es6": true,
