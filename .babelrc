@@ -1,7 +1,12 @@
 {
-  "env": {
-    "test": {
-      "plugins": ["transform-es2015-modules-commonjs"]
-    }
-  }
+  "presets": [
+    "env",
+    "stage-1",
+    "stage-3"
+  ],
+  "plugins": [
+    "babel-plugin-styled-components",
+    "babel-plugin-syntax-jsx",
+    "transform-react-jsx"
+  ]
 }
