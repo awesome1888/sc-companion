@@ -331,10 +331,10 @@ export const fColor = (props = {}) => {
     ${
       color !== hColor
         ? `
-      &:hover {
-        color: ${hColor};
-      }
-    `
+          &:hover {
+            color: ${hColor};
+          }
+        `
         : ''
     }
     
