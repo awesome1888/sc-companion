@@ -320,25 +320,43 @@ export const helvetica = () => {
   `;
 };
 
-export const fColor = (props = {}) => {
-  let { color, hColor, transitionTime } = props;
+export const fgColor = (props = {}) => {
+  let { color, hoverColor, transitionTime } = props;
   color = color || 'inherit';
-  hColor = hColor || null;
+  hoverColor = hoverColor || null;
   transitionTime = transitionTime || 0;
 
   return `
     color: ${color};
     ${
-      color !== hColor
+      color !== hoverColor
         ? `
           &:hover {
-            color: ${hColor};
+            color: ${hoverColor};
           }
         `
         : ''
     }
     
     ${transition('color', transitionTime)}
+  `;
+};
+
+export const bgColor = (props = {}) => {
+  let { color, hoverColor, focusColor, transitionTime } = props;
+  color = color || 'inherit';
+  transitionTime = transitionTime || 0;
+
+  return `
+    background-color: ${color};
+    &:hover {
+      background-color: ${hoverColor ? hoverColor : color};
+    }
+    &:focus {
+      background-color: ${focusColor ? focusColor : color};
+    }
+    
+    ${transition('border-color', transitionTime)}
   `;
 };
 
@@ -352,12 +370,12 @@ export const dashedUnderline = (props = {}) => {
     ${
       mode === 'hover'
         ? `
-        border: 0 none;
-    border-bottom: ${thickness} dashed transparent;
-  &:hover {
-      border-bottom: ${thickness} dashed ${color};
-    }
-    `
+          border: 0 none;
+          border-bottom: ${thickness} dashed transparent;
+          &:hover {
+            border-bottom: ${thickness} dashed ${color};
+          }
+        `
         : ''
     }
   
@@ -365,64 +383,47 @@ export const dashedUnderline = (props = {}) => {
   `;
 };
 
-// @mixin rb-bg-color($color: inherit, $h-color: false, $f-color: false, $transition-time: 0) {
-//   background-color: $color;
-//
-//   /* specify the color for hover, or use the main one */
-// @if $h-color != false {
-//   &:hover {
-//       background-color: $h-color;
-//     }
-//   } @else {
-//   &:hover {
-//       background-color: $color;
-//     }
-//   }
-//
-//   /* specify the color for focus, or use the main one */
-// @if $f-color != false {
-//   &:focus {
-//       background-color: $h-color;
-//     }
-//   } @else {
-//   &:focus {
-//       background-color: $color;
-//     }
-//   }
-//
-// @if $transition-time > 0 {
-//   @include rb-transition(background-color, $transition-time);
-//   }
-// }
+export const heightTrick = (props = {}) => {
+  let { w } = props;
+  w = w || '100%';
 
-// @mixin rb-height-trick($width: 100%) {
-//   position: relative;
-//   width: $width;
-//
-// &:before {
-//     content: "";
-//     display: block;
-//     padding-top: 100%;
-//   }
-//
-// > * {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     bottom: 0;
-//     right: 0;
-//   }
-// }
+  return `
+    position: relative;
+    width: ${w};
+  
+    &:before {
+      content: "";
+      display: block;
+      padding-top: 100%;
+    }
 
-// @mixin rb-fixed($alignment) {
-//   position: fixed;
-// @if ($alignment == 'cover') {
-//     top: 0;
-//     bottom: 0;
-//     left: 0;
-//     right: 0;
-//   }
-// }
+    > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  `;
+};
+
+export const fixed = (props = {}) => {
+  let { align } = props;
+
+  return `
+    position: fixed;
+    ${
+      align === 'cover'
+        ? `
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    `
+        : ''
+    }
+  `;
+};
 
 export const transition = (props = {}) => {
   let { what, duration } = props;
