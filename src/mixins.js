@@ -328,42 +328,42 @@ export const fColor = (props = {}) => {
 
   return `
     color: ${color};
-    &:focus, &:active {
-      color: $color;
+    ${
+      color !== hColor
+        ? `
+      &:hover {
+        color: ${hColor};
+      }
+    `
+        : ''
     }
+    
+    ${transition('color', transitionTime)}
   `;
 };
 
-// @mixin rb-color($color: inherit, $h-color: $color, $transition-time: 0) {
-//   color: $color;
-//
-//
-// @if $h-color != $color {
-//   &:hover {
-//       color: $h-color;
-//     }
-//   } @else {
-//     color: $color;
-//   }
-//
-// @if $transition-time > 0 {
-//   @include rb-transition(color, $transition-time);
-//   }
-// }
+export const dashedUnderline = (props = {}) => {
+  let { mode, thickness, color, transitionTime } = props;
+  color = color || 'currentcolor';
+  mode = mode || 'hover';
+  transitionTime = transitionTime || 0;
 
-// @mixin rb-dashed-underline($mode: hover, $thickness: 1px, $color: currentcolor, $transition-time: 0) {
-// @if $mode == hover {
-//     border: 0 none;
-//     border-bottom: $thickness dashed transparent;
-//   &:hover {
-//       border-bottom: $thickness dashed $color;
-//     }
-//   }
-//
-// @if $transition-time > 0 {
-//   @include rb-transition(border-color, $transition-time);
-//   }
-// }
+  return `
+    ${
+      mode === 'hover'
+        ? `
+        border: 0 none;
+    border-bottom: ${thickness} dashed transparent;
+  &:hover {
+      border-bottom: ${thickness} dashed ${color};
+    }
+    `
+        : ''
+    }
+  
+    ${transition('border-color', transitionTime)}
+  `;
+};
 
 // @mixin rb-bg-color($color: inherit, $h-color: false, $f-color: false, $transition-time: 0) {
 //   background-color: $color;
@@ -424,7 +424,17 @@ export const fColor = (props = {}) => {
 //   }
 // }
 
-// transition($what: all, $duration: 200ms) {
-//   transition: $what $duration ease;
-//   -webkit-transition: $what $duration ease;
-// }
+export const transition = (props = {}) => {
+  let { what, duration } = props;
+  what = what || 'all';
+  duration = duration || '200ms';
+
+  if (!duration) {
+    return '';
+  }
+
+  return `
+    transition: ${what} ${duration} ease;
+    -webkit-transition: ${what} ${duration} ease;
+  `;
+};
