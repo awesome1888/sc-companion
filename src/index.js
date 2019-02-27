@@ -9,8 +9,8 @@ export const mixin = allMixin;
 export const palette = allColors;
 
 export default {
-    animations,
-    grid,
-    mixin,
-    palette,
+  ...animations,
+  ...grid,
+  ...mixin,
+  palette,
 };
