@@ -1,11 +1,11 @@
 {
   "name": "sc-companion",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A set of mixins for Styled-Components",
   "module": "build/index.js",
   "scripts": {
     "build": "webpack --config webpack.js",
-    "build.dev": "webpack --config webpack.js --watch",
+    "start": "webpack --config webpack.js --watch",
     "test.u": "jest -c ./jest/config.unit.js --forceExit"
   },
   "keywords": [

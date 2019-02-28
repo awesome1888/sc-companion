@@ -173,16 +173,16 @@ export const group = (params = {}) => {
     y = 0;
   }
 
-  const negW = op(y, v => -1 * v);
-  const negH = op(x, v => -1 * v);
+  const negY = op(y, v => -1 * v);
+  const negX = op(x, v => -1 * v);
   return `
     & > * {
       margin-bottom: ${y};
       margin-right: ${x};
     }
 
-    margin-bottom: ${negH};
-    margin-right: ${negW};
+    margin-bottom: ${negY};
+    margin-right: ${negX};
   `;
 };
 

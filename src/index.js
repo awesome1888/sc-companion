@@ -1,14 +1,9 @@
-import * as allAnimations from './animations.js';
-import * as allGrid from './grid.js';
-import * as allMixin from './mixins.js';
-import * as allColors from './palette.js';
+const animations = require('./animations.js');
+const grid = require('./grid.js');
+const mixin = require('./mixins.js');
+const palette = require('./palette.js');
 
-export const animations = allAnimations;
-export const grid = allGrid;
-export const mixin = allMixin;
-export const palette = allColors;
-
-export default {
+module.exports = {
   ...animations,
   ...grid,
   ...mixin,
