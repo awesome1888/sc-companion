@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-export const bounce = keyframes`
+export const bouncedAnimation = keyframes`
   from {
     transform: translateY(20px);
   }
