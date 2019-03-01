@@ -123,6 +123,13 @@ export const flexNoShrink = () => {
   `;
 };
 
+/**
+ * Todo: support "orientation" parameter to be set to "row" or "column", currently only "row" is supported
+ * Todo: support "top/bottom/left/right" aliases
+ * @param params
+ * @param maybeY
+ * @returns {string}
+ */
 export const align = (params = {}, maybeY = null) => {
   params = params || {};
   let { x, y } = params;
