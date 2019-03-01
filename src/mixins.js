@@ -196,6 +196,20 @@ export const central = (params = {}) => {
   `;
 };
 
+export const centralColumn = (props = {}) => {
+  let { gutter } = props;
+  if (typeof gutter === 'undefined') {
+    gutter = '1rem';
+  }
+  return `
+    ${central(props)}
+    min-width: 320px;
+    height: 100%;
+    ${gutter ? `padding-left: ${gutter}; padding-right: ${gutter}` : ''}
+    box-sizing: border-box;
+  `;
+};
+
 export const disabled = () => {
   return `
     cursor: not-allowed;
