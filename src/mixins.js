@@ -88,8 +88,8 @@ export const align = (...args) => {
 export const flexJustifySelf = (...args) => {
     const $ = (alignment = 'start', direction = 'row') => {
         return `
-          margin: 0 auto;
-        `;
+      margin: 0 auto;
+    `;
     };
 
     if (args[0] && typeof args[0] !== 'string') {
@@ -102,8 +102,8 @@ export const flexJustifySelf = (...args) => {
 
 export const round = () => {
     return `
-      border-radius: 99999rem;
-    `;
+    border-radius: 99999rem;
+  `;
 };
 
 export const rectangle = (...args) => {
@@ -118,9 +118,9 @@ export const rectangle = (...args) => {
         }
 
         return `
-          width: ${width};
-          height: ${height};
-        `;
+      width: ${width};
+      height: ${height};
+    `;
     };
 
     if (args[0] && typeof args[0] !== 'string') {
@@ -329,16 +329,16 @@ export const bgColor = (props = {}) => {
     transitionTime = transitionTime || 0;
 
     return `
-      background-color: ${color};
-      &:hover {
-        background-color: ${hoverColor ? hoverColor : color};
-      }
-      &:focus {
-        background-color: ${focusColor ? focusColor : color};
-      }
-      
-      ${transition('border-color', transitionTime)}
-    `;
+    background-color: ${color};
+    &:hover {
+      background-color: ${hoverColor ? hoverColor : color};
+    }
+    &:focus {
+      background-color: ${focusColor ? focusColor : color};
+    }
+    
+    ${transition('border-color', transitionTime)}
+  `;
 };
 
 export const dashedUnderline = (props = {}) => {

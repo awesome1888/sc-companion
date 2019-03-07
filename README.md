@@ -4,6 +4,11 @@ A set of mixins for Styled-Components
 
 ## Installation
 
+Install peer packages:
+~~~
+npm install styled-components styled-components-grid;
+~~~
+
 ## Usage
 
 ## Build
