@@ -38,114 +38,66 @@ export const op = (val, fn) => {
   return val;
 };
 
-export const absoluteCover = () => {
-  return `
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  `;
-};
-
-export const flex = () => {
-  return `
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-  `;
-};
-
-export const flexGrow = (amount = 1) => {
-  return `
-    flex-grow: ${amount};
-    -webkit-flex-grow: ${amount};
-  `;
-};
-
-export const flexDirection = (way = 'row') => {
-  way = way === 'column' ? 'column' : 'row';
-  return `
-    flex-direction: ${way};
-    -ms-flex-direction: ${way};
-  `;
-};
-
-/**
- *
- * @param how {string} space-between|start|end|center
- * @returns {string}
- */
-export const flexJustifyContent = (how = 'space-between') => {
-  if (how === 'start' || how === 'end') {
-    how = `flex-${how}`;
+const j = how => {
+  if (how === 'start' || how === 'left' || how === 'top') {
+    return 'flex-start';
   }
-  return `
-    -webkit-justify-content: ${how};
-    justify-content: ${how};
-  `;
+  if (how === 'end' || how === 'right' || how === 'bottom') {
+    return 'flex-end';
+  }
+  if (how === 'middle') {
+    return 'center';
+  }
+  return how;
 };
 
-/**
- *
- * @param how {string} baseline|start|end|center|stretch
- * @returns {string}
- */
-export const flexAlignItems = (how = 'baseline') => {
-  let newNow = how;
-  if (how === 'start' || how === 'end') {
-    newNow = `flex-${how}`;
+export const align = (...args) => {
+  const $ = (y = null, x = null, direction = 'row') => {
+    console.dir(direction);
+    x = j(x);
+    y = j(y);
+    if (direction === 'column' || direction === 'col') {
+      return `
+                display: flex;
+                flex-direction: column;
+                ${y !== null && `justify-content: ${y}`}
+                ${x !== null && `align-items: ${x}`}
+            `;
+    } else {
+      return `
+                display: flex;
+                flex-direction: row;
+                ${x !== null && `justify-content: ${x}`}
+                ${y !== null && `align-items: ${y}`}
+            `;
+    }
+  };
+
+  if (
+    typeof args[0] !== 'undefined' &&
+    typeof args[0] !== 'string' &&
+    args.length === 1
+  ) {
+    const { y, x, direction } = args[0];
+    return $(y, x, direction);
+  } else {
+    return $(...args);
   }
-  if (how === 'central') {
-    how = 'center';
-  }
-  return `
-    -webkit-box-align: ${how};
-    -webkit-align-items: ${newNow};
-    -ms-flex-align: ${how};
-    align-items: ${newNow};
-  `;
 };
 
-export const flexWrap = () => {
-  return `
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  `;
-};
+export const flexJustifySelf = (...args) => {
+  const $ = (alignment = 'start', direction = 'row') => {
+    return `
+      margin: 0 auto;
+    `;
+  };
 
-export const flexNoShrink = () => {
-  return `
-    flex-shrink: 0;
-  `;
-};
-
-/**
- * Todo: support "orientation" parameter to be set to "row" or "column", currently only "row" is supported
- * Todo: support "top/bottom/left/right" aliases
- * @param params
- * @param maybeY
- * @returns {string}
- */
-export const align = (params = {}, maybeY = null) => {
-  params = params || {};
-  let { x, y } = params;
-  if (typeof params === 'string') {
-    x = params;
+  if (args[0] && typeof args[0] !== 'string') {
+    let { alignment, direction } = args[0];
+    return $(alignment, direction);
+  } else {
+    return $(...args);
   }
-  if (typeof maybeY === 'string') {
-    y = maybeY;
-  }
-
-  return `
-    ${flex()}
-    ${x !== null && flexJustifyContent(x)}
-    ${y !== null && flexAlignItems(y)}
-    ${flexDirection('row')}
-  `;
 };
 
 export const round = () => {
@@ -154,21 +106,29 @@ export const round = () => {
   `;
 };
 
-export const rectangle = (params = {}) => {
-  let { x, y, k } = params;
-  if (typeof y === 'undefined') {
-    y = x;
-  }
+export const rectangle = (...args) => {
+  const $ = (width, height = null, k = null) => {
+    if (height === null) {
+      height = width;
+    }
 
-  if (typeof k !== 'undefined') {
-    x = op(x, v => v * k);
-    y = op(y, v => v * k);
-  }
+    if (typeof k !== 'undefined') {
+      width = op(width, v => v * k);
+      height = op(height, v => v * k);
+    }
 
-  return `
-    width: ${x};
-    height: ${y};
-  `;
+    return `
+      width: ${width};
+      height: ${height};
+    `;
+  };
+
+  if (args[0] && typeof args[0] !== 'string') {
+    let { width, height, k } = args[0];
+    return $(width, height, k);
+  } else {
+    return $(...args);
+  }
 };
 
 export const group = (params = {}) => {
@@ -211,7 +171,7 @@ export const centralColumn = (props = {}) => {
   return `
     ${central(props)}
     min-width: 320px;
-    height: 100%;
+    height: 100vh;
     ${gutter ? `padding-left: ${gutter}; padding-right: ${gutter}` : ''}
     box-sizing: border-box;
   `;
@@ -446,17 +406,12 @@ export const fixed = (props = {}) => {
   `;
 };
 
-export const transition = (props = {}) => {
-  let { what, duration } = props;
-  what = what || 'all';
-  duration = duration || '200ms';
-
-  if (!duration) {
-    return '';
-  }
-
+export const absoluteCover = () => {
   return `
-    transition: ${what} ${duration} ease;
-    -webkit-transition: ${what} ${duration} ease;
-  `;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    `;
 };
