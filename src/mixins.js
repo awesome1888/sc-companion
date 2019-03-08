@@ -12,6 +12,13 @@ const pInt = val => {
     return iVal;
 };
 
+const trans = (what, duration) => {
+    if (duration <= 0) {
+        return '';
+    }
+    return `transition: ${what} ${duration} ease`;
+};
+
 /**
  * Performs an operation on val by applying a function
  * @param val
@@ -53,7 +60,6 @@ const j = how => {
 
 export const align = (...args) => {
     const $ = (y = null, x = null, direction = 'row') => {
-        console.dir(direction);
         x = j(x);
         y = j(y);
         if (direction === 'column' || direction === 'col') {
@@ -85,20 +91,20 @@ export const align = (...args) => {
     }
 };
 
-export const flexJustifySelf = (...args) => {
-    const $ = (alignment = 'start', direction = 'row') => {
-        return `
-      margin: 0 auto;
-    `;
-    };
-
-    if (args[0] && typeof args[0] !== 'string') {
-        let { alignment, direction } = args[0];
-        return $(alignment, direction);
-    } else {
-        return $(...args);
-    }
-};
+// export const flexJustifySelf = (...args) => {
+//     const $ = (alignment = 'start', direction = 'row') => {
+//         return `
+//       margin: 0 auto;
+//     `;
+//     };
+//
+//     if (args[0] && typeof args[0] !== 'string') {
+//         let { alignment, direction } = args[0];
+//         return $(alignment, direction);
+//     } else {
+//         return $(...args);
+//     }
+// };
 
 export const round = () => {
     return `
@@ -251,8 +257,8 @@ export const iconLabel = (props = {}) => {
     distance = distance || 0;
 
     return `
-    ${flex()}
-    ${iconVAlignment === 'baseline' ? flexAlignItems('baseline') : ''} 
+        display: flex;        
+    ${iconVAlignment === 'baseline' ? 'align-items: baseline' : ''} 
 
     ::before {
       content: '${code}';
@@ -319,7 +325,7 @@ export const fgColor = (props = {}) => {
             : ''
     }
     
-    ${transition('color', transitionTime)}
+    ${trans('color', transitionTime)}
   `;
 };
 
@@ -337,7 +343,7 @@ export const bgColor = (props = {}) => {
       background-color: ${focusColor ? focusColor : color};
     }
     
-    ${transition('border-color', transitionTime)}
+    ${trans('border-color', transitionTime)}
   `;
 };
 
@@ -360,7 +366,7 @@ export const dashedUnderline = (props = {}) => {
             : ''
     }
   
-    ${transition('border-color', transitionTime)}
+    ${trans('border-color', transitionTime)}
   `;
 };
 
