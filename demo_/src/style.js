@@ -13,7 +13,7 @@ export const RedSquare = styled.div`
     border: 1px solid red;
 `;
 
-export const BlueSquare = styled.div`
+export const Coin = styled.div`
     width: 10px;
     height: 10px;
     border: 1px solid blue;

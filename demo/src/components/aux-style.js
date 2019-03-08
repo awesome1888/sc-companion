@@ -1,5 +1,6 @@
 import styled from "styled-components"
-import { align, centralColumn } from "../lib/mixins.js"
+import { align, centralColumn, backgroundCover } from "../lib/mixins.js"
+import CoinImage from "../images/coin.png"
 
 export const Central = styled.div`
   ${centralColumn()}
@@ -13,10 +14,10 @@ export const RedSquare = styled.div`
   border: 1px solid red;
 `
 
-export const BlueSquare = styled.div`
+export const Coin = styled.div`
   width: 10px;
   height: 10px;
-  border: 1px solid blue;
+  ${backgroundCover(CoinImage)};
 `
 
 // ROW

@@ -7,83 +7,83 @@ class App extends Component {
             <S.Central>
                 <S.C>
                     <S.RowTopLeft>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.RowTopLeft>
                     <S.RowTopCenter>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.RowTopCenter>
                     <S.RowTopRight>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.RowTopRight>
 
                     <S.RowCenterLeft>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.RowCenterLeft>
                     <S.RowCenterCenter>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.RowCenterCenter>
                     <S.RowCenterRight>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.RowCenterRight>
 
                     <S.RowBottomLeft>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.RowBottomLeft>
                     <S.RowBottomCenter>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.RowBottomCenter>
                     <S.RowBottomRight>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.RowBottomRight>
                 </S.C>
 
                 <S.C>
                     <S.ColumnTopLeft>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.ColumnTopLeft>
                     <S.ColumnTopCenter>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.ColumnTopCenter>
                     <S.ColumnTopRight>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.ColumnTopRight>
 
                     <S.ColumnCenterLeft>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.ColumnCenterLeft>
                     <S.ColumnCenterCenter>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.ColumnCenterCenter>
                     <S.ColumnCenterRight>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.ColumnCenterRight>
 
                     <S.ColumnBottomLeft>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.ColumnBottomLeft>
                     <S.ColumnBottomCenter>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.ColumnBottomCenter>
                     <S.ColumnBottomRight>
-                        <S.BlueSquare />
-                        <S.BlueSquare />
+                        <S.Coin />
+                        <S.Coin />
                     </S.ColumnBottomRight>
                 </S.C>
             </S.Central>
