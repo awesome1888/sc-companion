@@ -25,7 +25,7 @@ const IndexPage = () => (
     </p>
 
     <h2>align()</h2>
-    <p>Uses flexbox to produce aligned containers.</p>
+    <p>Uses flexbox to produce aligned containers. 111</p>
 
     <SyntaxHighlighter language="javascript" style={docco}>
       {codeString}
