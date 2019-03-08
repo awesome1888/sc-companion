@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { align, centralColumn, backgroundCover } from "../lib/mixins.js"
-import CoinImage from "../images/coin.png"
+import CoinImage from "../images/coin.png" // http://www.iconarchive.com/show/super-mario-icons-by-ph03nyx.html
 
 export const Central = styled.div`
   ${centralColumn()}
