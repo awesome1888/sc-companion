@@ -11,6 +11,7 @@ module.exports = () => {
         },
         resolve: {
             extensions: ['.js', '.jsx'],
+            symlinks: false,
         },
         externals: ['styled-components', 'styled-components-grid'],
         module: {
