@@ -47,7 +47,7 @@ const IndexPage = () => (
       {'import { align } from "sc-companion" '}
     </SyntaxHL>
 
-    <h2>A brief into in the available mixins</h2>
+    <h2>A brief intro to the available mixins</h2>
 
     <h3>align()</h3>
     <p>Uses flexbox to produce aligned containers.</p>
@@ -165,6 +165,48 @@ const IndexPage = () => (
         If the content orientation is <code>column</code>, then it is visa-versa
       </li>
     </ul>
+
+    <h3>group()</h3>
+    <p>Adds horizontal and vertical gaps between the direct child nodes.</p>
+    <ul>
+      <li>The first argument stands for the vertical offset</li>
+      <li>The second one &mdash; guess</li>
+    </ul>
+
+    <p>Example:</p>
+
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const = styled.div\`
+  \${group('1rem', '1rem')}
+\`;`}
+    </SyntaxHL>
+
+    <S.Group>
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+      <S.Mushroom />
+    </S.Group>
   </Layout>
 )
 

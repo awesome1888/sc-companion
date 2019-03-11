@@ -1,7 +1,14 @@
 import React from "react"
 import styled from "styled-components"
-import { align, centralColumn, backgroundCover, group } from "../lib/mixins.js"
+import {
+  align,
+  centralColumn,
+  backgroundCover,
+  group,
+  rectangle,
+} from "../lib/mixins.js"
 import CoinImage from "../images/coin.png" // http://www.iconarchive.com/show/super-mario-icons-by-ph03nyx.html
+import MushroomImage from "../images/mushroom.png"
 
 export const Central = styled.div`
   ${centralColumn()}
@@ -111,4 +118,17 @@ export const ColumnBottomRight = styled(Square)`
 export const C = styled.div`
   ${align("top", "left")}
   ${group(null, "0.5rem")}
+`
+
+export const Group = styled.div`
+  ${group("1rem", "1rem")}
+  display: flex;
+  flex-wrap: wrap;
+`
+
+export const Mushroom = styled.div`
+  ${rectangle("3rem")}
+  ${backgroundCover(MushroomImage)}
+  background-color: #8c8a8a;
+  flex-shrink: 0;
 `
