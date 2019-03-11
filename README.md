@@ -11,6 +11,8 @@ npm install styled-components styled-components-grid;
 
 ## Usage
 
+See [a website](https://awesome1888.github.io/sc-companion/)
+
 ## Build
 
 To re-build the development version on each file change:
