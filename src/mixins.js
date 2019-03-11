@@ -100,8 +100,8 @@ export const align = (...args) => {
 // export const flexJustifySelf = (...args) => {
 //     const $ = (alignment = 'start', direction = 'row') => {
 //         return `
-//       margin: 0 auto;
-//     `;
+//           margin-top: auto;
+//         `;
 //     };
 //
 //     if (args[0] && typeof args[0] !== 'string') {
@@ -202,9 +202,9 @@ export const centralColumn = (...args) => {
 
 export const disabled = () => {
     return `
-    cursor: not-allowed;
-    pointer-events: none;
-  `;
+        cursor: not-allowed;
+        pointer-events: none;
+    `;
 };
 
 export const icon = (...args) => {
@@ -344,8 +344,8 @@ export const backgroundCover = (...args) => {
 
 export const helvetica = () => {
     return `
-    font-family: Helvetica, sans-serif;
-  `;
+        font-family: Helvetica, sans-serif;
+    `;
 };
 
 export const fgColor = (...args) => {
@@ -381,7 +381,7 @@ export const bgColor = (...args) => {
               background-color: ${focusColor ? focusColor : color};
             }
             
-            ${trans('border-color', transitionTime)}
+            ${trans('background-color', transitionTime)}
         `;
     };
 
@@ -458,10 +458,10 @@ export const fixedCover = () => {
 
 export const absoluteCover = () => {
     return `
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
     `;
 };

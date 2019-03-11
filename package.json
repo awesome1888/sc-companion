@@ -42,8 +42,8 @@
         "webpack-cli": "^3.2.3"
     },
     "peerDependencies": {
-        "styled-components": "4.x",
-        "styled-components-grid": "2.x",
+        "styled-components": "x.x",
+        "styled-components-grid": "x.x",
         "react": "x.x"
     },
     "dependencies": {},
