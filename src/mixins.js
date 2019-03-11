@@ -122,9 +122,11 @@ export const rectangle = (...args) => {
     const $ = (width, height = null, k = null) => {
         if (height === null) {
             height = width;
+        } else if (width === null) {
+            width = height;
         }
 
-        if (typeof k !== 'undefined') {
+        if (k !== null) {
             width = op(width, v => v * k);
             height = op(height, v => v * k);
         }
