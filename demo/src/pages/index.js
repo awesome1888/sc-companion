@@ -1,7 +1,14 @@
 import React from "react"
 import { Link } from "gatsby"
-import SyntaxHighlighter from "react-syntax-highlighter"
+import { Light as SyntaxHL } from "react-syntax-highlighter"
+//import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter/prism-light";
+
+import js from "react-syntax-highlighter/dist/esm/languages/hljs/javascript"
+import bash from "react-syntax-highlighter/dist/esm/languages/hljs/bash"
+// import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+
 import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs"
+import prism from "react-syntax-highlighter/dist/esm/styles/prism/prism"
 
 import Layout from "../components/layout"
 // import Image from "../components/image"
@@ -9,7 +16,9 @@ import SEO from "../components/seo"
 
 import * as S from "../components/aux-style.js"
 
-const codeString = "(num) => num + 1"
+SyntaxHL.registerLanguage("javascript", js)
+SyntaxHL.registerLanguage("bash", bash)
+// SyntaxHLPrism.registerLanguage('jsx', jsx);
 
 const IndexPage = () => (
   <Layout>
@@ -24,98 +33,138 @@ const IndexPage = () => (
       front-end.
     </p>
 
-    <h2>align()</h2>
-    <p>Uses flexbox to produce aligned containers. 111</p>
+    <h2>Usage</h2>
 
-    <SyntaxHighlighter language="javascript" style={docco}>
-      {codeString}
-    </SyntaxHighlighter>
+    <p>Install the library</p>
 
-    <div>
+    <SyntaxHL language="bash" style={docco}>
+      {"npm install sc-companion"}
+    </SyntaxHL>
+
+    <p>And then import</p>
+
+    <SyntaxHL language="javascript" style={docco}>
+      {'import { align } from "sc-companion" '}
+    </SyntaxHL>
+
+    <h2>A brief into in the available mixins</h2>
+
+    <h3>align()</h3>
+    <p>Uses flexbox to produce aligned containers.</p>
+    <ul>
+      <li>
+        The first argument is the vertical orientation, could be{" "}
+        <code>top|center|bottom</code>
+      </li>
+      <li>
+        The second one is the horizontal orientation, could be{" "}
+        <code>left|center|right</code>
+      </li>
+      <li>
+        The third one is the orientation of the content, could be{" "}
+        <code>row|column</code>
+      </li>
+    </ul>
+
+    <p>Example:</p>
+
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const = styled.div\`
+  \${align('center', 'center', 'column')}
+\`;`}
+    </SyntaxHL>
+
+    <p>Will produce this kind of layout:</p>
+    <p>
+      <S.ColumnCenterCenter>
+        <S.Coins />
+      </S.ColumnCenterCenter>
+    </p>
+
+    <p>All possible combinations are the following:</p>
+    <p>
       <S.C>
         <S.RowTopLeft>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.RowTopLeft>
         <S.RowTopCenter>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.RowTopCenter>
         <S.RowTopRight>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.RowTopRight>
 
         <S.RowCenterLeft>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.RowCenterLeft>
         <S.RowCenterCenter>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.RowCenterCenter>
         <S.RowCenterRight>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.RowCenterRight>
 
         <S.RowBottomLeft>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.RowBottomLeft>
         <S.RowBottomCenter>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.RowBottomCenter>
         <S.RowBottomRight>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.RowBottomRight>
       </S.C>
+    </p>
 
+    <p>
       <S.C>
         <S.ColumnTopLeft>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.ColumnTopLeft>
         <S.ColumnTopCenter>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.ColumnTopCenter>
         <S.ColumnTopRight>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.ColumnTopRight>
 
         <S.ColumnCenterLeft>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.ColumnCenterLeft>
         <S.ColumnCenterCenter>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.ColumnCenterCenter>
         <S.ColumnCenterRight>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.ColumnCenterRight>
 
         <S.ColumnBottomLeft>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.ColumnBottomLeft>
         <S.ColumnBottomCenter>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.ColumnBottomCenter>
         <S.ColumnBottomRight>
-          <S.Coin />
-          <S.Coin />
+          <S.Coins />
         </S.ColumnBottomRight>
       </S.C>
-    </div>
+    </p>
 
-    <Link to="/page-2/">Go to page 2</Link>
+    <p>
+      Also, according to{" "}
+      <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">this</a>
+      :
+    </p>
+    <ul>
+      <li>
+        If the content orientation is <code>row</code>, then the first argument
+        can be also <code>stretch|baseline</code>, and the second one is{" "}
+        <code>space-between|space-around|space-evenly</code>
+      </li>
+      <li>
+        If the content orientation is <code>column</code>, then it is visa-versa
+      </li>
+    </ul>
   </Layout>
 )
 
