@@ -1,9 +1,11 @@
 {
     "name": "sc-companion",
-    "version": "1.0.2",
+    "version": "2.0.0",
     "description": "A set of mixins for Styled-Components",
-    "module": "build/index.js",
     "main": "index.js",
+    "browser": {
+        "./build/index.js": "./build/index.js"
+    },
     "scripts": {
         "build": "webpack --config webpack.js",
         "start": "webpack --config webpack.js --watch",
@@ -40,13 +42,10 @@
     },
     "peerDependencies": {
         "styled-components": "4.x",
-        "styled-components-grid": "2.x"
+        "styled-components-grid": "2.x",
+        "react": "x.x"
     },
-    "dependencies": {
-        "@babel/polyfill": "^7.2.5",
-        "react": "^16.8.3",
-        "react-dom": "^16.8.3"
-    },
+    "dependencies": {},
     "husky": {
         "hooks": {
             "pre-commit": "pretty-quick --staged"

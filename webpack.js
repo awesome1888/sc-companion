@@ -12,7 +12,7 @@ module.exports = () => {
             extensions: ['.js', '.jsx'],
             symlinks: false,
         },
-        externals: ['styled-components', 'styled-components-grid'],
+        externals: ['styled-components', 'styled-components-grid', 'react'],
         module: {
             rules: [
                 {
