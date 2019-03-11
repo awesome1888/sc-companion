@@ -26,11 +26,13 @@ const IndexPage = () => (
       title="Welcome"
       keywords={[`sc-companion`, `styled-components`, `react`]}
     />
-    <h1>What?</h1>
+    <h1>Wppphat?</h1>
     <p>
-      Yes, another library, that provides a set of useful mixins to make the
-      development process easier, if you utilize styled-components in your
-      front-end.
+      Yes, another library, that provides a set of mixins I frequently utilise
+      when making my Styled-Components-based frontend. Thre are also some CSS
+      tricks I have managed to dig up in places like Stackoverflow during my
+      career.
+      <br /> Enjoy if you like.
     </p>
 
     <h2>Usage</h2>
@@ -69,7 +71,7 @@ const IndexPage = () => (
     <p>Example:</p>
 
     <SyntaxHL language="javascript" style={docco}>
-      {`export const = styled.div\`
+      {`export const Aligner = styled.div\`
   \${align('center', 'center', 'column')}
 \`;`}
     </SyntaxHL>
@@ -176,7 +178,7 @@ const IndexPage = () => (
     <p>Example:</p>
 
     <SyntaxHL language="javascript" style={docco}>
-      {`export const = styled.div\`
+      {`export const Groupped = styled.div\`
   \${group('1rem', '1rem')}
 \`;`}
     </SyntaxHL>
@@ -207,6 +209,134 @@ const IndexPage = () => (
       <S.Mushroom />
       <S.Mushroom />
     </S.Group>
+
+    <h3>rectangle()</h3>
+    <p>
+      Sets height and width of the element to the specified values, and scales
+      it, if necessary.
+    </p>
+    <ul>
+      <li>The first argument stands for the vertical offset</li>
+      <li>The second one &mdash; guess</li>
+    </ul>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const Rect = styled.div\`
+  \${rectangle('10rem', '20rem', 0.5)}
+\`;`}
+    </SyntaxHL>
+    <p>Will produce a rectangle of 5rem x 10rem:</p>
+    <S.Rect />
+
+    <h3>centralColumn()</h3>
+    <p>
+      Creates a central column which is typically used in a simple one-column
+      design.
+    </p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const MainContainer = styled.div\`
+  \${centralColumn()}
+\`;`}
+    </SyntaxHL>
+
+    <h3>disabled()</h3>
+    <p>"Disables" an element on CSS-level.</p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const Disableable = styled.div\`
+  \${props => props.disabled ? disabled() : ''}
+\`;`}
+    </SyntaxHL>
+    <S.Disabled disabled>I am a sad disabled button</S.Disabled>
+
+    {/*<h3>icon()</h3>*/}
+    {/*<p>Adds a MaterialUI "button"</p>*/}
+    {/*<SyntaxHL language="javascript" style={docco}>*/}
+    {/*{`export const Icon = styled.div\`*/}
+    {/*\${icon(\'face\', \'3rem\', \'2rem\')}*/}
+    {/*\`;`}*/}
+    {/*</SyntaxHL>*/}
+
+    {/*<S.IconFace />*/}
+
+    <h3>ellipsis()</h3>
+    <p>
+      Cuts the text if too long. This mixin is presented in any library, so I
+      have decided to support the tradition :)
+    </p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const TooLong = styled.div\`
+  \${ellipsis()}
+  width: 5rem;
+\`;`}
+    </SyntaxHL>
+
+    <S.TooLong>Too cold, too early, too monday</S.TooLong>
+
+    <h3>fgColor()</h3>
+    <p>
+      Sets a text color with optional on-hover effect with optional transition
+    </p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const BeautifulA = styled.a\`
+  \${fgColor('red', 'blue', '200ms')}
+\`;`}
+    </SyntaxHL>
+
+    <S.BeautifulA href="#">Too cold, too early, too monday</S.BeautifulA>
+
+    <h3>bgColor()</h3>
+    <p>
+      Sets a background color with optional on-hover and on-focus effects with
+      optional transition
+    </p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const BeautifulButton = styled.a\`
+  \${bgColor('red', 'blue', 'green', '200ms')}
+\`;`}
+    </SyntaxHL>
+
+    <S.BeautifulButton>Too cold, too early, too monday</S.BeautifulButton>
+
+    <h3>dashedUnderline()</h3>
+    <p>
+      Underlines a block of text with dashed line and a color of your choice and
+      applies optional on-hover and on-focus effects with optional transition.
+      Currently, only <code>on-hover</code> mode is supported, sorry :(
+    </p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const DashEm = styled.span\`
+  \${dashedUnderline('on-hover', '1px', 'red', '200ms')}
+\`;`}
+    </SyntaxHL>
+
+    <S.DashEm>Too cold, too early, too monday</S.DashEm>
+
+    <h3>heightTrick()</h3>
+    <p>
+      Creates a responsive container whose height is always the same as its
+      width. The content of such container should be always absolute with top,
+      bottom, left and right equal to zero.
+    </p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const MagicSquare = styled.div\`
+  \${heightTrick()}
+\`;`}
+    </SyntaxHL>
+
+    <S.Constraint>
+      <S.Equality>
+        <S.EqInner>Too cold, too early, too monday</S.EqInner>
+      </S.Equality>
+    </S.Constraint>
+
+    <S.TBC>To be continued.... *epic music*</S.TBC>
   </Layout>
 )
 

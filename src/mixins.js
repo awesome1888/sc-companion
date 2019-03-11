@@ -119,7 +119,7 @@ export const round = () => {
 };
 
 export const rectangle = (...args) => {
-    const $ = (width, height = null, k = null) => {
+    const $ = (height = null, width = null, k = null) => {
         if (height === null) {
             height = width;
         } else if (width === null) {
@@ -132,14 +132,14 @@ export const rectangle = (...args) => {
         }
 
         return `
-          width: ${width};
-          height: ${height};
+          ${width !== null && `width: ${width};`}
+          ${height !== null && `height: ${height};`}
         `;
     };
 
     if (args[0] && typeof args[0] !== 'string') {
-        let { width, height, k } = args[0];
-        return $(width, height, k);
+        let { height, width, k } = args[0];
+        return $(height, width, k);
     } else {
         return $(...args);
     }
@@ -206,12 +206,15 @@ export const disabled = () => {
     return `
         cursor: not-allowed;
         pointer-events: none;
+        user-select: none;
     `;
 };
 
 export const icon = (...args) => {
     const $ = (code = 'help', size = 'inherit', offset = 0) => {
         return `
+            ${fontMaterialIcons()}
+        
             height: ${size};
             width: ${size};
             font-size: ${size};
@@ -220,9 +223,11 @@ export const icon = (...args) => {
             padding: ${offset};
             ::before {
               content: '${code}';
+                height: ${size};
+                width: ${size};
+                display: block;
             }
-        
-            ${fontMaterialIcons()}
+
             font-family: Material Icons, sans-serif;
         `;
     };
@@ -397,14 +402,14 @@ export const bgColor = (...args) => {
 
 export const dashedUnderline = (...args) => {
     const $ = (
-        mode = 'hover',
+        mode = 'on-hover',
         thickness = '1px',
         color = 'currentcolor',
         transitionTime = 0,
     ) => {
         return `
             ${
-                mode === 'hover'
+                mode === 'on-hover'
                     ? `
                   border: 0 none;
                   border-bottom: ${thickness} dashed transparent;

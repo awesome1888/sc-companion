@@ -6,6 +6,14 @@ import {
   backgroundCover,
   group,
   rectangle,
+  icon,
+  ellipsis,
+  fgColor,
+  bgColor,
+  dashedUnderline,
+  heightTrick,
+  absoluteCover,
+  disabled,
 } from "../lib/mixins.js"
 import CoinImage from "../images/coin.png" // http://www.iconarchive.com/show/super-mario-icons-by-ph03nyx.html
 import MushroomImage from "../images/mushroom.png"
@@ -131,4 +139,60 @@ export const Mushroom = styled.div`
   ${backgroundCover(MushroomImage)}
   background-color: #8c8a8a;
   flex-shrink: 0;
+`
+
+export const Rect = styled.div`
+  ${rectangle("10rem", "20rem", 0.5)}
+  background-color: red;
+`
+
+export const IconFace = styled.div`
+  ${icon("face", "3rem", "2rem")}
+`
+
+export const TooLong = styled.div`
+  ${ellipsis()}
+  width: 5rem;
+`
+
+export const BeautifulA = styled.a`
+  ${fgColor("red", "blue", "200ms")}
+`
+
+export const BeautifulButton = styled.button`
+  ${bgColor("red", "blue", "green", "200ms")}
+  padding: 1rem 2rem;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  user-select: none;
+  outline: none;
+  cursor: pointer;
+`
+
+export const DashEm = styled.span`
+  ${dashedUnderline("on-hover", "1px", "red", "200ms")}
+`
+
+export const Constraint = styled.div`
+  max-width: 10rem;
+`
+
+export const Equality = styled.div`
+  ${heightTrick()}
+  border: 1px solid red;
+`
+
+export const EqInner = styled.div`
+  ${absoluteCover()}
+`
+
+export const Disabled = styled.button`
+  ${props => (props.disabled ? disabled() : "")}
+`
+
+export const TBC = styled.div`
+  padding-top: 3rem;
+  ${align("center", "center")}
+  font-size: 1.5rem;
 `
