@@ -8,6 +8,7 @@
     },
     "scripts": {
         "build": "webpack --config webpack.js",
+        "build.dev": "webpack --config webpack.js --mode development",
         "start": "webpack --config webpack.js --watch",
         "test.u": "jest -c ./jest/config.unit.js --forceExit"
     },

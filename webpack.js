@@ -1,9 +1,13 @@
 const path = require('path');
 
-module.exports = () => {
+module.exports = (env, argv) => {
+    env = env || {};
+    const development =
+        argv.mode === 'development' || env.NODE_ENV === 'development';
+
     return {
         entry: path.join(__dirname, 'src/index.js'),
-        mode: 'production',
+        mode: development ? 'development' : 'production',
         output: {
             filename: 'index.js',
             path: path.join(__dirname, 'build'),
