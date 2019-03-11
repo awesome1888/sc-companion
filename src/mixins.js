@@ -19,6 +19,12 @@ const trans = (what, duration) => {
     return `transition: ${what} ${duration} ease`;
 };
 
+const fontMaterialIcons = () => {
+    return `
+    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+  `;
+};
+
 /**
  * Performs an operation on val by applying a function
  * @param val
@@ -124,9 +130,9 @@ export const rectangle = (...args) => {
         }
 
         return `
-      width: ${width};
-      height: ${height};
-    `;
+          width: ${width};
+          height: ${height};
+        `;
     };
 
     if (args[0] && typeof args[0] !== 'string') {
@@ -137,50 +143,61 @@ export const rectangle = (...args) => {
     }
 };
 
-export const group = (params = {}) => {
-    let { x, y } = params;
-    if (typeof x === 'undefined') {
-        x = 0;
-    }
-    if (typeof y === 'undefined') {
-        y = 0;
-    }
+export const group = (...args) => {
+    const $ = (hOffs = null, wOffs = null) => {
+        return `
+            & > * {
+                ${hOffs !== null && `margin-bottom: ${hOffs}`};
+                ${wOffs !== null && `margin-right: ${wOffs}`}
+            }
+        
+            ${hOffs !== null && `margin-bottom: ${op(hOffs, v => -1 * v)}`}
+            ${wOffs !== null && `margin-right: ${op(wOffs, v => -1 * v)}`}
+        `;
+    };
 
-    const negY = op(y, v => -1 * v);
-    const negX = op(x, v => -1 * v);
-    return `
-    & > * {
-      margin-bottom: ${y};
-      margin-right: ${x};
+    if (args[0] && typeof args[0] !== 'string') {
+        let { hOffs, wOffs } = args[0];
+        return $(hOffs, wOffs);
+    } else {
+        return $(...args);
     }
-
-    margin-bottom: ${negY};
-    margin-right: ${negX};
-  `;
 };
 
-export const central = (params = {}) => {
-    let { maxWidth } = params;
-    maxWidth = maxWidth || '960px';
-    return `
-    margin-left: auto;
-    margin-right: auto;
-    max-width: ${maxWidth};
-  `;
+export const central = (...args) => {
+    const $ = (maxWidth = '960px') => {
+        return `
+            margin-left: auto;
+            margin-right: auto;
+            max-width: ${maxWidth};
+        `;
+    };
+
+    if (args[0] && typeof args[0] !== 'string') {
+        let { maxWidth } = args[0];
+        return $(maxWidth);
+    } else {
+        return $(...args);
+    }
 };
 
-export const centralColumn = (props = {}) => {
-    let { gutter } = props;
-    if (typeof gutter === 'undefined') {
-        gutter = '1rem';
+export const centralColumn = (...args) => {
+    const $ = (maxWidth = '960px', gutter = '1rem') => {
+        return `
+            ${central(...args)}
+            min-width: 320px;
+            height: 100vh;
+            ${gutter ? `padding-left: ${gutter}; padding-right: ${gutter}` : ''}
+            box-sizing: border-box;
+        `;
+    };
+
+    if (args[0] && typeof args[0] !== 'string') {
+        let { maxWidth, gutter } = args[0];
+        return $(maxWidth, gutter);
+    } else {
+        return $(...args);
     }
-    return `
-    ${central(props)}
-    min-width: 320px;
-    height: 100vh;
-    ${gutter ? `padding-left: ${gutter}; padding-right: ${gutter}` : ''}
-    box-sizing: border-box;
-  `;
 };
 
 export const disabled = () => {
@@ -190,115 +207,139 @@ export const disabled = () => {
   `;
 };
 
-export const fontMaterialIcons = () => {
-    return `
-    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-  `;
-};
+export const icon = (...args) => {
+    const $ = (code = 'help', size = 'inherit', offset = 0) => {
+        return `
+            height: ${size};
+            width: ${size};
+            font-size: ${size};
+            box-sizing: content-box;
+        
+            padding: ${offset};
+            ::before {
+              content: '${code}';
+            }
+        
+            ${fontMaterialIcons()}
+            font-family: Material Icons, sans-serif;
+        `;
+    };
 
-export const icon = (params = {}) => {
-    let { code, size, offset } = params;
-    code = code || '';
-    size = size || 'inherit';
-    offset = offset || 0;
-
-    return `
-    height: ${size};
-	  width: ${size};
-	  font-size: ${size};
-	  box-sizing: content-box;
-
-    padding: ${offset};
-    ::before {
-      content: '${code}';
+    if (args[0] && typeof args[0] !== 'string') {
+        let { code, size, offset } = args[0];
+        return $(code, size, offset);
+    } else {
+        return $(...args);
     }
-
-    ${fontMaterialIcons()}
-    font-family: Material Icons, sans-serif;
-  `;
 };
 
-export const mirror = (params = {}) => {
-    const { way } = params;
+export const mirror = () => {
     return `
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
-  `;
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    `;
 };
 
 export const fontReset = () => {
     return `
-    font-style: normal;
-    letter-spacing: normal;
-    direction: ltr;
-    -webkit-font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
-  `;
+        font-style: normal;
+        letter-spacing: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+    `;
 };
 
-export const iconLabel = (props = {}) => {
-    let {
-        code,
-        size,
-        iconVAlignment,
-        iconHAlignment,
-        iconWidth,
-        distance,
-    } = props;
-    code = code || 'help';
-    size = size || 'inherit';
-    iconVAlignment = iconVAlignment || 'baseline';
-    iconHAlignment = iconHAlignment || 0;
-    iconWidth = iconWidth || 'auto';
-    distance = distance || 0;
+export const iconLabel = (...args) => {
+    const $ = (
+        code = 'help',
+        size = 'inherit',
+        iconVAlignment = 'baseline',
+        iconHAlignment = 0,
+        iconWidth = 'auto',
+        distance = 0,
+    ) => {
+        return `
+            display: flex;        
+            ${iconVAlignment === 'baseline' ? 'align-items: baseline' : ''} 
+        
+            ::before {
+              content: '${code}';
+              flex-shrink: 0;
+              padding-right: ${distance};
+              ${fontMaterialIcons()}
+              font-family: Material Icons, sans-serif;
+              ${fontReset()}
+              font-size: ${size};
+              text-align: center;
+              width: ${iconWidth};
+          
+              ${
+                  iconVAlignment !== 'baseline'
+                      ? `margin-top: ${iconVAlignment}`
+                      : ''
+              }
+              ${
+                  iconHAlignment !== 'baseline'
+                      ? `margin-bottom: ${iconHAlignment}`
+                      : ''
+              }
+            }
+        `;
+    };
 
-    return `
-        display: flex;        
-    ${iconVAlignment === 'baseline' ? 'align-items: baseline' : ''} 
-
-    ::before {
-      content: '${code}';
-      flex-shrink: 0;
-      padding-right: ${distance};
-      ${fontMaterialIcons()}
-      font-family: Material Icons, sans-serif;
-      ${fontReset()}
-      font-size: ${size};
-      text-align: center;
-      width: ${iconWidth};
-  
-      ${iconVAlignment !== 'baseline' ? `margin-top: ${iconVAlignment}` : ''}
-      ${iconHAlignment !== 'baseline' ? `margin-bottom: ${iconHAlignment}` : ''}
+    if (args[0] && typeof args[0] !== 'string') {
+        let {
+            code,
+            size,
+            iconVAlignment,
+            iconHAlignment,
+            iconWidth,
+            distance,
+        } = args[0];
+        return $(
+            code,
+            size,
+            iconVAlignment,
+            iconHAlignment,
+            iconWidth,
+            distance,
+        );
+    } else {
+        return $(...args);
     }
-  `;
 };
 
 export const ellipsis = () => {
     return `
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow-x: hidden;
-  `;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+    `;
 };
 
-export const backgroundCover = (props = {}) => {
-    let { image } = props;
-    if (typeof props === 'string') {
-        image = props;
-    }
+export const backgroundCover = (...args) => {
+    const $ = (image = null) => {
+        return `
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: scroll;
+            
+            ${image ? `background-image: url(${image});` : ''}
+        `;
+    };
 
-    return `
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: scroll;
-    
-    ${image ? `background-image: url(${image});` : ''}  
-  `;
+    if (args[0] && typeof args[0] !== 'string') {
+        let { image } = args[0];
+        return $(image);
+    } else {
+        return $(...args);
+    }
 };
 
 export const helvetica = () => {
@@ -307,108 +348,111 @@ export const helvetica = () => {
   `;
 };
 
-export const fgColor = (props = {}) => {
-    let { color, hoverColor, transitionTime } = props;
-    color = color || 'inherit';
-    hoverColor = hoverColor || null;
-    transitionTime = transitionTime || 0;
+export const fgColor = (...args) => {
+    const $ = (color = 'inherit', hoverColor = null, transitionTime = 0) => {
+        return `
+            color: ${color};
+            ${color !== hoverColor && `&:hover { color: ${hoverColor} }`}
+            ${trans('color', transitionTime)}
+        `;
+    };
 
-    return `
-    color: ${color};
-    ${
-        color !== hoverColor
-            ? `
-          &:hover {
-            color: ${hoverColor};
-          }
-        `
-            : ''
+    if (args[0] && typeof args[0] !== 'string') {
+        let { color, hoverColor, transitionTime } = args[0];
+        return $(color, hoverColor, transitionTime);
+    } else {
+        return $(...args);
     }
+};
+
+export const bgColor = (...args) => {
+    const $ = (
+        color = 'inherit',
+        hoverColor = null,
+        focusColor = null,
+        transitionTime = 0,
+    ) => {
+        return `
+            background-color: ${color};
+            &:hover {
+              background-color: ${hoverColor ? hoverColor : color};
+            }
+            &:focus {
+              background-color: ${focusColor ? focusColor : color};
+            }
+            
+            ${trans('border-color', transitionTime)}
+        `;
+    };
+
+    if (args[0] && typeof args[0] !== 'string') {
+        let { color, hoverColor, focusColor, transitionTime } = args[0];
+        return $(color, hoverColor, focusColor, transitionTime);
+    } else {
+        return $(...args);
+    }
+};
+
+export const dashedUnderline = (...args) => {
+    const $ = (
+        mode = 'hover',
+        thickness = '1px',
+        color = 'currentcolor',
+        transitionTime = 0,
+    ) => {
+        return `
+            ${
+                mode === 'hover'
+                    ? `
+                  border: 0 none;
+                  border-bottom: ${thickness} dashed transparent;
+                  &:hover {
+                    border-bottom: ${thickness} dashed ${color};
+                  }
+                `
+                    : ''
+            }
+
+            ${trans('border-color', transitionTime)}
+        `;
+    };
+
+    if (args[0] && typeof args[0] !== 'string') {
+        let { mode, thickness, color, transitionTime } = args[0];
+        return $(mode, thickness, color, transitionTime);
+    } else {
+        return $(...args);
+    }
+};
+
+export const heightTrick = () => {
+    return `
+        position: relative;
+        width: 100%;
+      
+        &:before {
+          content: "";
+          display: block;
+          padding-top: 100%;
+        }
     
-    ${trans('color', transitionTime)}
-  `;
+        > * {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+        }
+    `;
 };
 
-export const bgColor = (props = {}) => {
-    let { color, hoverColor, focusColor, transitionTime } = props;
-    color = color || 'inherit';
-    transitionTime = transitionTime || 0;
-
+export const fixedCover = () => {
     return `
-    background-color: ${color};
-    &:hover {
-      background-color: ${hoverColor ? hoverColor : color};
-    }
-    &:focus {
-      background-color: ${focusColor ? focusColor : color};
-    }
-    
-    ${trans('border-color', transitionTime)}
-  `;
-};
-
-export const dashedUnderline = (props = {}) => {
-    let { mode, thickness, color, transitionTime } = props;
-    color = color || 'currentcolor';
-    mode = mode || 'hover';
-    transitionTime = transitionTime || 0;
-
-    return `
-    ${
-        mode === 'hover'
-            ? `
-          border: 0 none;
-          border-bottom: ${thickness} dashed transparent;
-          &:hover {
-            border-bottom: ${thickness} dashed ${color};
-          }
-        `
-            : ''
-    }
-  
-    ${trans('border-color', transitionTime)}
-  `;
-};
-
-export const heightTrick = (props = {}) => {
-    let { w } = props;
-    w = w || '100%';
-
-    return `
-    position: relative;
-    width: ${w};
-  
-    &:before {
-      content: "";
-      display: block;
-      padding-top: 100%;
-    }
-
-    > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-    }
-  `;
-};
-
-export const fixed = (props = {}) => {
-    let { align } = props;
-
-    return `
-    position: fixed;
-    ${
-        align === 'cover'
-            ? `
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    `
-            : ''
-    }
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
   `;
 };
 

@@ -7,7 +7,6 @@ module.exports = () => {
         output: {
             filename: 'index.js',
             path: path.join(__dirname, 'build'),
-            libraryTarget: 'amd',
         },
         resolve: {
             extensions: ['.js', '.jsx'],
