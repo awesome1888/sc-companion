@@ -11,7 +11,7 @@ npm install styled-components styled-components-grid;
 
 ## Usage
 
-See [a website](https://awesome1888.github.io/sc-companion/)
+Visit [this website](https://awesome1888.github.io/sc-companion/) to see the examples.
 
 ## Build
 

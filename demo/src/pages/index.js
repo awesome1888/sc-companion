@@ -336,7 +336,77 @@ const IndexPage = () => (
       </S.Equality>
     </S.Constraint>
 
+    <p>(please resize the window to see the result)</p>
+
+    <h2>Grids</h2>
+    <p>
+      Well, grids are not actually a part of <code>sc-companion</code>, the
+      library just makes a proxy for another cool library called{" "}
+      <a
+        href="https://www.npmjs.com/package/styled-components-grid"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        style-components-grid
+      </a>
+      . It just adds a little bit of syntax sugar over it.
+    </p>
+
+    <p>
+      Example (sorry about the colors, did not make the syntax highlighter work
+      for JSX):
+    </p>
+
+    <SyntaxHL language="javascript" style={docco}>
+      {`const { Grid, Cell } = makeGrid();
+
+return (
+    <Grid>
+      <Cell lg={4} sm={2} xs={6}>Left</Cell>
+      <Cell lg={4} sm={8} xs={6}>Middle</Cell>
+      <Cell lg={4} sm={2} xs={6}>Right</Cell>
+    </Grid>
+);`}
+    </SyntaxHL>
+
+    <S.Grid>
+      <S.RedCell lg={4} sm={2} xs={6}>
+        Left
+      </S.RedCell>
+      <S.RedCell lg={4} sm={8} xs={6}>
+        Middle
+      </S.RedCell>
+      <S.RedCell lg={4} sm={2} xs={6}>
+        Right
+      </S.RedCell>
+    </S.Grid>
+
+    <br />
+    <p>
+      The possible options for <code>makeGrid()</code> are:
+    </p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`{
+  resolution: 12, // the resoultion of the grid (default to 12 to align with Bootstrap)
+  breakpoints: {
+      xs: 0,
+      sm: 576,
+      md: 768,
+      lg: 992,
+      xl: 1200,
+    },
+}`}
+    </SyntaxHL>
+
     <S.TBC>To be continued.... *epic music*</S.TBC>
+
+    <h2>The Github repo</h2>
+    <p>
+      Is here:{" "}
+      <a href="https://github.com/awesome1888/sc-companion">
+        https://github.com/awesome1888/sc-companion
+      </a>
+    </p>
   </Layout>
 )
 

@@ -15,6 +15,7 @@ import {
   absoluteCover,
   disabled,
 } from "../lib/mixins.js"
+import { makeGrid } from "../lib/grid"
 import CoinImage from "../images/coin.png" // http://www.iconarchive.com/show/super-mario-icons-by-ph03nyx.html
 import MushroomImage from "../images/mushroom.png"
 
@@ -195,4 +196,10 @@ export const TBC = styled.div`
   padding-top: 3rem;
   ${align("center", "center")}
   font-size: 1.5rem;
+`
+
+export const { Grid, Cell } = makeGrid()
+
+export const RedCell = styled(Cell)`
+  border: 1px solid red;
 `
