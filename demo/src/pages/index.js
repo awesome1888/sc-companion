@@ -336,8 +336,7 @@ const IndexPage = () => (
       </S.Equality>
     </S.Constraint>
 
-    <p>(please resize the window to see the result)</p>
-
+    <br />
     <h2>Grids</h2>
     <p>
       I used to think that <code>sc-companion</code> is a cool library. But any
@@ -376,34 +375,57 @@ return (
 
     <br />
     <SyntaxHL language="javascript" style={docco}>
-      {`const { Grid, Cell } = makeGrid({ gutterH: '1rem', gutterV: '1rem' });
+      {`const { Grid, Cell } = makeGrid({
+    gutterH: '0.5rem',
+    gutterV: '0.5rem',
+    resolution: 20,
+    breakpoints: {
+        a: 1400,
+        b: 1200,
+        c: 1000,
+        d: 800,
+        e: 600,
+    },
+});
 
 return (
     <Grid>
-      <Cell>Left</Cell>
-      <Cell>Middle</Cell>
-      <Cell>Right</Cell>
+      <Cell a={18} b={14} c={10} d={6} e={2}>
+          Left
+      </Cell>
+      <Cell a={2} b={6} c={10} d={14} e={18}>
+          Right
+      </Cell>
+      <Cell a={20}>
+          Center
+      </Cell>
+      <Cell a={2} b={6} c={10} d={14} e={18}>
+          Left
+      </Cell>
+      <Cell a={18} b={14} c={10} d={6} e={2}>
+          Right
+      </Cell>
     </Grid>
 );`}
     </SyntaxHL>
 
-    <S.Grid>
-      <S.Cell lg={8} md={6} sm={4}>
+    <S.GridAlt>
+      <S.CellAlt a={18} b={14} c={10} d={6} e={2}>
         <S.GridInner>Left</S.GridInner>
-      </S.Cell>
-      <S.Cell lg={4} md={6} sm={8}>
+      </S.CellAlt>
+      <S.CellAlt a={2} b={6} c={10} d={14} e={18}>
+        <S.GridInner>Right</S.GridInner>
+      </S.CellAlt>
+      <S.CellAlt a={20}>
+        <S.GridInner>Center</S.GridInner>
+      </S.CellAlt>
+      <S.CellAlt a={2} b={6} c={10} d={14} e={18}>
         <S.GridInner>Left</S.GridInner>
-      </S.Cell>
-      <S.Cell lg={12}>
-        <S.GridInner>Left</S.GridInner>
-      </S.Cell>
-      <S.Cell lg={4} md={6} sm={8}>
-        <S.GridInner>Left</S.GridInner>
-      </S.Cell>
-      <S.Cell lg={8} md={6} sm={4}>
-        <S.GridInner>Left</S.GridInner>
-      </S.Cell>
-    </S.Grid>
+      </S.CellAlt>
+      <S.CellAlt a={18} b={14} c={10} d={6} e={2}>
+        <S.GridInner>Right</S.GridInner>
+      </S.CellAlt>
+    </S.GridAlt>
 
     <br />
     <SyntaxHL language="javascript" style={docco}>
@@ -423,10 +445,10 @@ return (
         <S.GridInner>Left</S.GridInner>
       </S.Cell>
       <S.Cell>
-        <S.GridInner>Left</S.GridInner>
+        <S.GridInner>Middle</S.GridInner>
       </S.Cell>
       <S.Cell>
-        <S.GridInner>Left</S.GridInner>
+        <S.GridInner>Right</S.GridInner>
       </S.Cell>
     </S.Grid>
 
@@ -449,8 +471,6 @@ return (
 }`}
     </SyntaxHL>
 
-    <S.TBC>To be continued.... *epic music*</S.TBC>
-
     <h2>The Github repo</h2>
     <p>
       Is here:{" "}
@@ -458,6 +478,8 @@ return (
         https://github.com/awesome1888/sc-companion
       </a>
     </p>
+
+    <S.TBC>To be continued.... *epic music*</S.TBC>
   </Layout>
 )
 

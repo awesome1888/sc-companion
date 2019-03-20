@@ -181,11 +181,13 @@ export const Constraint = styled.div`
 
 export const Equality = styled.div`
   ${heightTrick()}
-  border: 1px solid red;
+  border: 1px solid #6f2b9e;
+  border-radius: 4px;
 `
 
 export const EqInner = styled.div`
   ${absoluteCover()}
+  padding: 1rem;
 `
 
 export const Disabled = styled.button`
@@ -206,6 +208,23 @@ const GridSys = makeGrid({
 export const Grid = styled(GridSys.Grid)``
 
 export const Cell = styled(GridSys.Cell)``
+
+const GridSysAlt = makeGrid({
+  gutterH: "0.5rem",
+  gutterV: "0.5rem",
+  resolution: 20,
+  breakpoints: {
+    a: 1400,
+    b: 1200,
+    c: 1000,
+    d: 800,
+    e: 600,
+  },
+})
+
+export const GridAlt = styled(GridSysAlt.Grid)``
+
+export const CellAlt = styled(GridSysAlt.Cell)``
 
 export const GridInner = styled.div`
   border: 1px solid #6f2b9e;
