@@ -10,7 +10,8 @@ import {
   ellipsis,
   fgColor,
   bgColor,
-  dashedUnderline,
+  underline,
+  textDecoration,
   heightTrick,
   absoluteCover,
   disabled,
@@ -172,7 +173,11 @@ export const BeautifulButton = styled.button`
 `
 
 export const DashEm = styled.span`
-  ${dashedUnderline("on-hover", "1px", "red", "200ms")}
+  ${underline("on-hover", "1px", "red", "200ms")}
+`
+
+export const Decorated = styled.span`
+  ${textDecoration("on-hout", "underline red")}
 `
 
 export const Constraint = styled.div`

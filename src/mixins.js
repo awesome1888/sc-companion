@@ -362,7 +362,7 @@ export const bgColor = (...args) => {
     }
 };
 
-export const dashedUnderline = (...args) => {
+export const underline = (...args) => {
     const $ = (
         mode = 'on-hover',
         thickness = '1px',
@@ -373,12 +373,12 @@ export const dashedUnderline = (...args) => {
             ${
                 mode === 'on-hover'
                     ? `
-                  border: 0 none;
-                  border-bottom: ${thickness} dashed transparent;
-                  &:hover {
-                    border-bottom: ${thickness} dashed ${color};
-                  }
-                `
+                      border: 0 none;
+                      border-bottom: ${thickness} dashed transparent;
+                      &:hover {
+                        border-bottom: ${thickness} dashed ${color};
+                      }
+                    `
                     : ''
             }
 
@@ -389,6 +389,41 @@ export const dashedUnderline = (...args) => {
     if (args[0] && typeof args[0] !== 'string') {
         let { mode, thickness, color, transitionTime } = args[0];
         return $(mode, thickness, color, transitionTime);
+    } else {
+        return $(...args);
+    }
+};
+
+export const textDecoration = (...args) => {
+    const $ = (mode = 'on-hover', decoration = 'underline') => {
+        return `
+            ${
+                mode === 'on-hover'
+                    ? `
+                  text-decoration: none;
+                  &:hover {
+                    text-decoration: ${decoration};
+                  };
+                `
+                    : ''
+            }
+            ${
+                mode === 'on-hout'
+                    ? `
+                  text-decoration: ${decoration};
+                  &:hover {
+                    text-decoration: none;
+                  }
+                `
+                    : ''
+            }
+            }
+        `;
+    };
+
+    if (args[0] && typeof args[0] !== 'string') {
+        let { mode, decoration } = args[0];
+        return $(mode, decoration);
     } else {
         return $(...args);
     }

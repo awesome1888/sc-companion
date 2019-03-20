@@ -302,7 +302,7 @@ const IndexPage = () => (
 
     <S.BeautifulButton>Too cold, too early, too monday</S.BeautifulButton>
 
-    <h3>dashedUnderline()</h3>
+    <h3>underline()</h3>
     <p>
       Underlines a block of text with dashed line and a color of your choice and
       applies optional on-hover and on-focus effects with optional transition.
@@ -311,11 +311,24 @@ const IndexPage = () => (
     <p>Example:</p>
     <SyntaxHL language="javascript" style={docco}>
       {`export const DashEm = styled.span\`
-  \${dashedUnderline('on-hover', '1px', 'red', '200ms')}
+  \${underline('on-hover', '1px', 'red', '200ms')}
 \`;`}
     </SyntaxHL>
 
     <S.DashEm>Too cold, too early, too monday</S.DashEm>
+
+    <h3>textDecoration()</h3>
+    <p>
+      Decorates text of a block <code>on-hover</code> or <code>on-hout</code>
+    </p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const Decorated = styled.span\`
+  \${textDecoration('on-hout', 'underline red')}
+\`;`}
+    </SyntaxHL>
+
+    <S.Decorated>Too cold, too early, too monday</S.Decorated>
 
     <h3>heightTrick()</h3>
     <p>
