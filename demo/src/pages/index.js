@@ -340,61 +340,112 @@ const IndexPage = () => (
 
     <h2>Grids</h2>
     <p>
-      Well, grids are not actually a part of <code>sc-companion</code>, the
-      library just makes a proxy for another cool library called{" "}
-      <a
-        href="https://www.npmjs.com/package/styled-components-grid"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        style-components-grid
-      </a>
-      . It just adds a little bit of syntax sugar over it.
+      I used to think that <code>sc-companion</code> is a cool library. But any
+      cool UI library has it's own grid system. So I thought why don't I spend
+      15 minutes of my time and code one?
     </p>
 
     <p>
-      Example (sorry about the colors, did not make the syntax highlighter work
-      for JSX):
+      Some examples (sorry about the colors, did not make the syntax highlighter
+      to work for JSX):
     </p>
 
     <SyntaxHL language="javascript" style={docco}>
-      {`const { Grid, Cell } = makeGrid();
+      {`const { Grid, Cell } = makeGrid({ gutterH: '1rem', gutterV: '1rem' });
 
 return (
     <Grid>
-      <Cell lg={4} sm={2} xs={6}>Left</Cell>
-      <Cell lg={4} sm={8} xs={6}>Middle</Cell>
-      <Cell lg={4} sm={2} xs={6}>Right</Cell>
+      <Cell sm={6} lg={4}>Left</Cell>
+      <Cell sm={6} lg={4}>Middle</Cell>
+      <Cell sm={12} lg={4}>Right</Cell>
     </Grid>
 );`}
     </SyntaxHL>
 
     <S.Grid>
-      <S.RedCell lg={4} sm={2} xs={6}>
-        Left
-      </S.RedCell>
-      <S.RedCell lg={4} sm={8} xs={6}>
-        Middle
-      </S.RedCell>
-      <S.RedCell lg={4} sm={2} xs={6}>
-        Right
-      </S.RedCell>
+      <S.Cell sm={6} lg={4}>
+        <S.GridInner>Left</S.GridInner>
+      </S.Cell>
+      <S.Cell sm={6} lg={4}>
+        <S.GridInner>Middle</S.GridInner>
+      </S.Cell>
+      <S.Cell sm={12} lg={4}>
+        <S.GridInner>Right</S.GridInner>
+      </S.Cell>
+    </S.Grid>
+
+    <br />
+    <SyntaxHL language="javascript" style={docco}>
+      {`const { Grid, Cell } = makeGrid({ gutterH: '1rem', gutterV: '1rem' });
+
+return (
+    <Grid>
+      <Cell>Left</Cell>
+      <Cell>Middle</Cell>
+      <Cell>Right</Cell>
+    </Grid>
+);`}
+    </SyntaxHL>
+
+    <S.Grid>
+      <S.Cell lg={8} md={6} sm={4}>
+        <S.GridInner>Left</S.GridInner>
+      </S.Cell>
+      <S.Cell lg={4} md={6} sm={8}>
+        <S.GridInner>Left</S.GridInner>
+      </S.Cell>
+      <S.Cell lg={12}>
+        <S.GridInner>Left</S.GridInner>
+      </S.Cell>
+      <S.Cell lg={4} md={6} sm={8}>
+        <S.GridInner>Left</S.GridInner>
+      </S.Cell>
+      <S.Cell lg={8} md={6} sm={4}>
+        <S.GridInner>Left</S.GridInner>
+      </S.Cell>
+    </S.Grid>
+
+    <br />
+    <SyntaxHL language="javascript" style={docco}>
+      {`const { Grid, Cell } = makeGrid({ gutterH: '1rem', gutterV: '1rem' });
+
+return (
+    <Grid>
+      <Cell>Left</Cell>
+      <Cell>Middle</Cell>
+      <Cell>Right</Cell>
+    </Grid>
+);`}
+    </SyntaxHL>
+
+    <S.Grid>
+      <S.Cell>
+        <S.GridInner>Left</S.GridInner>
+      </S.Cell>
+      <S.Cell>
+        <S.GridInner>Left</S.GridInner>
+      </S.Cell>
+      <S.Cell>
+        <S.GridInner>Left</S.GridInner>
+      </S.Cell>
     </S.Grid>
 
     <br />
     <p>
-      The possible options for <code>makeGrid()</code> are:
+      The default options for <code>makeGrid()</code> are meant to align the
+      system with Bootstrap:
     </p>
     <SyntaxHL language="javascript" style={docco}>
       {`{
-  resolution: 12, // the resoultion of the grid (default to 12 to align with Bootstrap)
+  resolution: 12,
+  gutterH: 0,
+  gutterV: 0,
   breakpoints: {
-      xs: 0,
-      sm: 576,
-      md: 768,
-      lg: 992,
-      xl: 1200,
-    },
+    xl: 1200,
+    lg: 992,
+    md: 768,
+    sm: 576,
+  },
 }`}
     </SyntaxHL>
 

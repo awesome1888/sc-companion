@@ -198,8 +198,18 @@ export const TBC = styled.div`
   font-size: 1.5rem;
 `
 
-export const { Grid, Cell } = makeGrid()
+const GridSys = makeGrid({
+  gutterH: "1rem",
+  gutterV: "1rem",
+})
 
-export const RedCell = styled(Cell)`
-  border: 1px solid red;
+export const Grid = styled(GridSys.Grid)``
+
+export const Cell = styled(GridSys.Cell)``
+
+export const GridInner = styled.div`
+  border: 1px solid #6f2b9e;
+  border-radius: 4px;
+  padding: 1rem;
+  height: 100%;
 `
