@@ -484,7 +484,6 @@ return (
 }`}
     </SyntaxHL>
 
-    <br />
     <p>
       I can also offer a mixin to create grids (which are slightly more
       powerful, because they allow to set responsive gutters):

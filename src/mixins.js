@@ -34,15 +34,15 @@ export const align = (...args) => {
             return `
                 display: flex;
                 flex-direction: column;
-                ${y !== null && `justify-content: ${y}`}
-                ${x !== null && `align-items: ${x}`}
+                ${y !== null ? `justify-content: ${y}` : ''}
+                ${x !== null ? `align-items: ${x}` : ''}
             `;
         } else {
             return `
                 display: flex;
                 flex-direction: row;
-                ${x !== null && `justify-content: ${x}`}
-                ${y !== null && `align-items: ${y}`}
+                ${x !== null ? `justify-content: ${x}` : ''}
+                ${y !== null ? `align-items: ${y}` : ''}
             `;
         }
     };
@@ -94,8 +94,8 @@ export const rectangle = (...args) => {
         }
 
         return `
-          ${width !== null && `width: ${width};`}
-          ${height !== null && `height: ${height};`}
+          ${width !== null ? `width: ${width};` : ''}
+          ${height !== null ? `height: ${height};` : ''}
         `;
     };
 
@@ -111,12 +111,12 @@ export const group = (...args) => {
     const $ = (hOffs = null, wOffs = null) => {
         return `
             & > * {
-                ${hOffs !== null && `margin-bottom: ${hOffs}`};
-                ${wOffs !== null && `margin-right: ${wOffs}`}
+                ${hOffs !== null ? `margin-bottom: ${hOffs}` : ''};
+                ${wOffs !== null ? `margin-right: ${wOffs}` : ''}
             }
         
-            ${hOffs !== null && `margin-bottom: ${op(hOffs, v => -1 * v)}`}
-            ${wOffs !== null && `margin-right: ${op(wOffs, v => -1 * v)}`}
+            ${hOffs !== null ? `margin-bottom: ${op(hOffs, v => -1 * v)}` : ''}
+            ${wOffs !== null ? `margin-right: ${op(wOffs, v => -1 * v)}` : ''}
         `;
     };
 
