@@ -546,6 +546,64 @@ export const Cell = styled.div\`
     </p>
 
     <br />
+    <h2>z-Index constants</h2>
+    <p>
+      If we name each z-index level by a name, wouldn't it be easier to work?
+    </p>
+
+    <S.Levels>
+      <S.Sun>
+        zIxSun
+        <br />
+        7000
+      </S.Sun>
+      <S.Venus>
+        zIxVenus
+        <br />
+        6000
+      </S.Venus>
+      <S.Mars>
+        zIxMars
+        <br />
+        5000
+      </S.Mars>
+      <S.Moon>
+        zIxMoon
+        <br />
+        4000
+      </S.Moon>
+      <S.Orbit>
+        zIxOrbit
+        <br />
+        3000
+      </S.Orbit>
+      <S.Stratosphere>
+        zIxStratosphere
+        <br />
+        2000
+      </S.Stratosphere>
+      <S.Everest>
+        zIxEverest
+        <br />
+        1000
+      </S.Everest>
+      <S.Ground>
+        zIxGround
+        <br />0
+      </S.Ground>
+      <S.SeaBottom>
+        zIxSeaBottom
+        <br />
+        -1000
+      </S.SeaBottom>
+      <S.Hell>
+        zIxHell
+        <br />
+        -2000
+      </S.Hell>
+    </S.Levels>
+
+    <br />
     <h2>The Github repo</h2>
     <p>
       Is here:{" "}

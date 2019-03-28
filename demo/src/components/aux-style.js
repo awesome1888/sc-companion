@@ -17,6 +17,7 @@ import {
   disabled,
 } from "../lib/mixins.js"
 import { makeGrid, cell, grid } from "../lib/grid"
+import * as Z from "../lib/constants"
 import CoinImage from "../images/coin.png" // http://www.iconarchive.com/show/super-mario-icons-by-ph03nyx.html
 import MushroomImage from "../images/mushroom.png"
 
@@ -257,4 +258,63 @@ export const GridNew = styled.div`
 
 export const CellNew = styled.div`
   ${props => cell({ ...props, config: theme.grid })}
+`
+
+export const Levels = styled.div`
+  ${align("top", "left", "column")}
+`
+
+export const zindexed = (offs, zIndex) => {
+  return `
+    ${rectangle("3rem", "5rem")}
+     border: 1px solid #6f2b9e;
+     border-radius: 4px;
+     background-color: white;
+     ${align("center", "center")}
+     ${offs ? `margin-top: -0.5rem; margin-left: ${offs}rem;` : ""}
+     font-size: 12px;
+     color: gray;
+     z-index: ${zIndex};
+     text-align: center;
+  `
+}
+
+export const Sun = styled.div`
+  ${zindexed(0, Z.zIxSun)};
+`
+
+export const Venus = styled.div`
+  ${zindexed(1, Z.zIxVenus)};
+`
+
+export const Mars = styled.div`
+  ${zindexed(2, Z.zIxMars)};
+`
+
+export const Moon = styled.div`
+  ${zindexed(3, Z.zIxMoon)};
+`
+
+export const Orbit = styled.div`
+  ${zindexed(4, Z.zIxOrbit)};
+`
+
+export const Stratosphere = styled.div`
+  ${zindexed(5, Z.zIxStratosphere)};
+`
+
+export const Everest = styled.div`
+  ${zindexed(6, Z.zIxEverest)};
+`
+
+export const Ground = styled.div`
+  ${zindexed(7, Z.zIxGround)};
+`
+
+export const SeaBottom = styled.div`
+  ${zindexed(8, Z.zIxSeaBottom)};
+`
+
+export const Hell = styled.div`
+  ${zindexed(9, Z.zIxHell)};
 `

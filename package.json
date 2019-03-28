@@ -1,6 +1,6 @@
 {
     "name": "sc-companion",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "A set of mixins for Styled-Components",
     "main": "index.js",
     "browser": {
