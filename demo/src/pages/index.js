@@ -467,8 +467,8 @@ return (
 
     <br />
     <p>
-      The default options for <code>makeGrid()</code> are meant to align the
-      system with Bootstrap:
+      The default options for <code>makeGrid()</code> are aligned with the
+      system of Bootstrap (breakpoints are set in pixels):
     </p>
     <SyntaxHL language="javascript" style={docco}>
       {`{
@@ -484,6 +484,69 @@ return (
 }`}
     </SyntaxHL>
 
+    <br />
+    <p>
+      I can also offer a mixin to create grids (which are slightly more
+      powerful, because they allow to set responsive gutters):
+    </p>
+
+    <SyntaxHL language="javascript" style={docco}>
+      {`const theme = {
+    grid: {
+        resolution: 20,
+        breakpoints: {
+            a: 1400,
+            b: 1200,
+            c: 1000,
+            d: 800,
+            e: 600,
+        },
+    },
+};
+
+export const Grid = styled.div\`
+  \${props => grid({...props, config: theme.grid})}
+\`;
+
+export const Cell = styled.div\`
+  \${props => cell({...props, config: theme.grid})}
+\`;
+`}
+    </SyntaxHL>
+    <p>And then:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`<Grid gw-a="0.2rem" gw-b="0.5rem" gw-c="0.7rem" gw-d="1rem" gw-e="1.2rem">
+    <Cell a={18} b={14} c={10} d={6} e={2}>
+        Left
+    </Cell>
+    <Cell a={2} b={6} c={10} d={14} e={18}>
+        Right
+    </Cell>
+</Grid>
+`}
+    </SyntaxHL>
+
+    <S.GridNew
+      gw-a="0.2rem"
+      gw-b="0.5rem"
+      gw-c="0.7rem"
+      gw-d="1rem"
+      gw-e="1.2rem"
+    >
+      <S.CellNew a={18} b={14} c={10} d={6} e={2}>
+        <S.GridInner>Left</S.GridInner>
+      </S.CellNew>
+      <S.CellNew a={2} b={6} c={10} d={14} e={18}>
+        <S.GridInner>Right</S.GridInner>
+      </S.CellNew>
+    </S.GridNew>
+    <br />
+    <p>
+      Note, that <code>gw-[breakpoint]</code> and <code>gh-[breakpoint]</code>{" "}
+      stand for "horizontal" and "vertical" gutters respectively.
+    </p>
+
+    <br />
     <h2>The Github repo</h2>
     <p>
       Is here:{" "}

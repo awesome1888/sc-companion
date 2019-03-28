@@ -16,7 +16,7 @@ import {
   absoluteCover,
   disabled,
 } from "../lib/mixins.js"
-import { makeGrid } from "../lib/grid"
+import { makeGrid, cell, grid } from "../lib/grid"
 import CoinImage from "../images/coin.png" // http://www.iconarchive.com/show/super-mario-icons-by-ph03nyx.html
 import MushroomImage from "../images/mushroom.png"
 
@@ -236,4 +236,25 @@ export const GridInner = styled.div`
   border-radius: 4px;
   padding: 1rem;
   height: 100%;
+`
+
+const theme = {
+  grid: {
+    resolution: 20,
+    breakpoints: {
+      a: 1400,
+      b: 1200,
+      c: 1000,
+      d: 800,
+      e: 600,
+    },
+  },
+}
+
+export const GridNew = styled.div`
+  ${props => grid({ ...props, config: theme.grid })}
+`
+
+export const CellNew = styled.div`
+  ${props => cell({ ...props, config: theme.grid })}
 `
