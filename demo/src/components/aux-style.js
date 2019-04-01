@@ -318,3 +318,7 @@ export const SeaBottom = styled.div`
 export const Hell = styled.div`
   ${zindexed(9, Z.zIxHell)};
 `
+
+export const DisabledForm = styled.div`
+  ${disabled(0.3)}
+`

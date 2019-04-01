@@ -107,6 +107,11 @@ export const rectangle = (...args) => {
     }
 };
 
+/**
+ * Group does not care whether there are inline or block elements, or flex-boxes.
+ * @param args
+ * @returns {string|jQuery|HTMLElement}
+ */
 export const group = (...args) => {
     const $ = (hOffs = null, wOffs = null) => {
         return `
@@ -164,11 +169,16 @@ export const centralColumn = (...args) => {
     }
 };
 
-export const disabled = () => {
+export const disabled = (opacity = null) => {
     return `
         cursor: not-allowed;
         pointer-events: none;
         user-select: none;
+        ${opacity !== null ? `opacity: ${opacity};` : ''}
+        
+        & * {
+            user-select: none;
+        }
     `;
 };
 
@@ -176,7 +186,7 @@ export const icon = (...args) => {
     const $ = (code = 'help', size = 'inherit', offset = 0) => {
         return `
             ${fontMaterialIcons()}
-        
+
             height: ${size};
             width: ${size};
             font-size: ${size};

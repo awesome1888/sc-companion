@@ -244,11 +244,30 @@ const IndexPage = () => (
     <p>"Disables" an element on CSS-level.</p>
     <p>Example:</p>
     <SyntaxHL language="javascript" style={docco}>
-      {`export const Disableable = styled.div\`
+      {`export const Disableabled = styled.div\`
   \${props => props.disabled ? disabled() : ''}
 \`;`}
     </SyntaxHL>
     <S.Disabled disabled>I am a sad disabled button</S.Disabled>
+    <br />
+    <br />
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const DisableabledForm = styled.div\`
+  \${props => props.disabled ? disabled(0.3) : ''}
+\`;`}
+    </SyntaxHL>
+    <S.DisabledForm>
+      <div>
+        You can't select me, I am disabled. Also, I am almost invisible, because
+        the <code>opacity</code> parameter was set to <code>0.3</code>
+      </div>
+      <button>This button cannot be clicked.</button>{" "}
+      <input
+        type="text"
+        value="This input can't be changed"
+        style={{ width: "300px" }}
+      />
+    </S.DisabledForm>
 
     {/*<h3>icon()</h3>*/}
     {/*<p>Adds a MaterialUI "button"</p>*/}
