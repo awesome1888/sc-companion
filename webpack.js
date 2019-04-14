@@ -17,7 +17,7 @@ module.exports = (env, argv) => {
             extensions: ['.js', '.jsx'],
             symlinks: false,
         },
-        externals: ['styled-components', 'styled-components-grid', 'react'],
+        externals: ['styled-components', 'react'],
         module: {
             rules: [
                 {
