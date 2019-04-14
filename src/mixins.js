@@ -7,6 +7,10 @@ const trans = (what, duration) => {
     return `transition: ${what} ${duration} ease`;
 };
 
+// const fontImport = (font) => `
+//     @import url('https://fonts.googleapis.com/icon?family=${encodeURIComponent(font)}');
+// `;
+
 const fontMaterialIcons = () => {
     return `
         @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
@@ -182,36 +186,6 @@ export const disabled = (opacity = null) => {
     `;
 };
 
-export const icon = (...args) => {
-    const $ = (code = 'help', size = 'inherit', offset = 0) => {
-        return `
-            ${fontMaterialIcons()}
-
-            height: ${size};
-            width: ${size};
-            font-size: ${size};
-            box-sizing: content-box;
-        
-            padding: ${offset};
-            ::before {
-              content: '${code}';
-                height: ${size};
-                width: ${size};
-                display: block;
-            }
-
-            font-family: Material Icons, sans-serif;
-        `;
-    };
-
-    if (args[0] && typeof args[0] !== 'string') {
-        let { code, size, offset } = args[0];
-        return $(code, size, offset);
-    } else {
-        return $(...args);
-    }
-};
-
 export const mirror = () => {
     return `
         -moz-transform: scaleX(-1);
@@ -233,6 +207,36 @@ export const fontReset = () => {
     `;
 };
 
+export const icon = (...args) => {
+    const $ = (code = 'help', size = 'inherit', offset = 0) => {
+        return `
+            height: ${size};
+            width: ${size};
+            font-size: ${size};
+            line-height: 100%;
+            box-sizing: content-box;
+
+            padding: ${offset};
+            ::before {
+                content: '${code}';
+                height: ${size};
+                width: ${size};
+                display: block;
+                text-transform: none;
+            }
+
+            font-family: Material Icons, sans-serif;
+        `;
+    };
+
+    if (args[0] && typeof args[0] !== 'string') {
+        let { code, size, offset } = args[0];
+        return $(code, size, offset);
+    } else {
+        return $(...args);
+    }
+};
+
 export const iconLabel = (...args) => {
     const $ = (
         code = 'help',
@@ -247,26 +251,26 @@ export const iconLabel = (...args) => {
             ${iconVAlignment === 'baseline' ? 'align-items: baseline' : ''} 
         
             ::before {
-              content: '${code}';
-              flex-shrink: 0;
-              padding-right: ${distance};
-              ${fontMaterialIcons()}
-              font-family: Material Icons, sans-serif;
-              ${fontReset()}
-              font-size: ${size};
-              text-align: center;
-              width: ${iconWidth};
-          
-              ${
-                  iconVAlignment !== 'baseline'
-                      ? `margin-top: ${iconVAlignment}`
-                      : ''
-              }
-              ${
-                  iconHAlignment !== 'baseline'
-                      ? `margin-bottom: ${iconHAlignment}`
-                      : ''
-              }
+                content: '${code}';
+                flex-shrink: 0;
+                padding-right: ${distance};
+                font-family: Material Icons, sans-serif;
+                ${fontReset()}
+                text-transform: none;
+                font-size: ${size};
+                text-align: center;
+                width: ${iconWidth};
+                
+                ${
+                    iconVAlignment !== 'baseline'
+                        ? `margin-top: ${iconVAlignment}`
+                        : ''
+                }
+                ${
+                    iconHAlignment !== 'baseline'
+                        ? `margin-bottom: ${iconHAlignment}`
+                        : ''
+                }
             }
         `;
     };
