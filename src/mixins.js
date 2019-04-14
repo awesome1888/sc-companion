@@ -11,7 +11,7 @@ const trans = (what, duration) => {
 //     @import url('https://fonts.googleapis.com/icon?family=${encodeURIComponent(font)}');
 // `;
 
-const fontMaterialIcons = () => {
+export const fontMaterialIcons = () => {
     return `
         @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
     `;

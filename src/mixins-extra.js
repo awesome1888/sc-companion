@@ -2,7 +2,8 @@ import { fgColor } from './mixins';
 
 export const stdLink = style => {
     style = style || {};
-    const { hover, hout } = style;
+    style.color = style.color || {};
+    const { hover, hout } = style.color;
 
     return `
 	    text-decoration: none;
