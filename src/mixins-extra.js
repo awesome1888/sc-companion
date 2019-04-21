@@ -36,7 +36,7 @@ export const stdInput = (style, hasError = false, hasFocus = null) => {
             ? hover
                 ? `
 			        &:hover {border-color: ${hover};}; transition: border-color 200ms ease;
-			        ${focus ? `border-color: ${hover};` : ''}
+			        ${hasFocus ? `border-color: ${hover};` : ''}
 			    `
                 : ''
             : ''
