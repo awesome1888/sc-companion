@@ -260,7 +260,8 @@ export const iconLabel = (...args) => {
                 font-size: ${size};
                 text-align: center;
                 width: ${iconWidth};
-                
+                line-height: 100%;
+
                 ${
                     iconVAlignment !== 'baseline'
                         ? `margin-top: ${iconVAlignment}`
@@ -483,3 +484,12 @@ export const absoluteCover = () => {
         right: 0;
     `;
 };
+
+export const borderColor = (hout, hover) => `
+	${hout ? `border-color: ${hout};` : ''}
+	${
+        hover
+            ? `&:hover { border-color: ${hover}; transition: border-color 200ms ease;}`
+            : ''
+    }
+`;
