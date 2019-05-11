@@ -493,3 +493,13 @@ export const borderColor = (hout, hover) => `
             : ''
     }
 `;
+
+/**
+ * To fix this:
+ * https://stackoverflow.com/questions/50068078/how-to-prevent-flex-items-from-overflowing-flex-parent-with-no-wrap
+ * @returns {string}
+ */
+export const normalizeCellWidth = () => `
+    min-width: 100px;
+    flex-grow: 1;
+`;
