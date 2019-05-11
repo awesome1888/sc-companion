@@ -15,6 +15,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import * as S from "../components/aux-style.js"
+import { TooLong } from "../components/aux-style.js"
 
 SyntaxHL.registerLanguage("javascript", js)
 SyntaxHL.registerLanguage("bash", bash)
@@ -210,75 +211,6 @@ const IndexPage = () => (
       <S.Mushroom />
     </S.Group>
 
-    <h3>rectangle()</h3>
-    <p>
-      Sets height and width of the element to the specified values, and scales
-      it, if necessary.
-    </p>
-    <ul>
-      <li>The first argument stands for the vertical offset</li>
-      <li>The second one &mdash; guess</li>
-    </ul>
-    <p>Example:</p>
-    <SyntaxHL language="javascript" style={docco}>
-      {`export const Rect = styled.div\`
-  \${rectangle('10rem', '20rem', 0.5)}
-\`;`}
-    </SyntaxHL>
-    <p>Will produce a rectangle of 5rem x 10rem:</p>
-    <S.Rect />
-
-    <h3>centralColumn()</h3>
-    <p>
-      Creates a central column which is typically used in a simple one-column
-      design.
-    </p>
-    <p>Example:</p>
-    <SyntaxHL language="javascript" style={docco}>
-      {`export const MainContainer = styled.div\`
-  \${centralColumn()}
-\`;`}
-    </SyntaxHL>
-
-    <h3>disabled()</h3>
-    <p>"Disables" an element on CSS-level.</p>
-    <p>Example:</p>
-    <SyntaxHL language="javascript" style={docco}>
-      {`export const Disableabled = styled.div\`
-  \${props => props.disabled ? disabled() : ''}
-\`;`}
-    </SyntaxHL>
-    <S.Disabled disabled>I am a sad disabled button</S.Disabled>
-    <br />
-    <br />
-    <SyntaxHL language="javascript" style={docco}>
-      {`export const DisableabledForm = styled.div\`
-  \${props => props.disabled ? disabled(0.3) : ''}
-\`;`}
-    </SyntaxHL>
-    <S.DisabledForm>
-      <div>
-        You can't select me, I am disabled. Also, I am almost invisible, because
-        the <code>opacity</code> parameter was set to <code>0.3</code>
-      </div>
-      <button>This button cannot be clicked.</button>{" "}
-      <input
-        type="text"
-        value="This input can't be changed"
-        style={{ width: "300px" }}
-      />
-    </S.DisabledForm>
-
-    {/*<h3>icon()</h3>*/}
-    {/*<p>Adds a MaterialUI "button"</p>*/}
-    {/*<SyntaxHL language="javascript" style={docco}>*/}
-    {/*{`export const Icon = styled.div\`*/}
-    {/*\${icon(\'face\', \'3rem\', \'2rem\')}*/}
-    {/*\`;`}*/}
-    {/*</SyntaxHL>*/}
-
-    {/*<S.IconFace />*/}
-
     <h3>ellipsis()</h3>
     <p>
       Cuts the text if too long. This mixin is presented in any library, so I
@@ -292,7 +224,7 @@ const IndexPage = () => (
 \`;`}
     </SyntaxHL>
 
-    <S.TooLong>Too cold, too early, too monday</S.TooLong>
+    <TooLong>Too cold, too early, too monday</TooLong>
 
     <h3>fgColor()</h3>
     <p>
@@ -376,193 +308,68 @@ const IndexPage = () => (
       15 minutes of my time and code one?
     </p>
 
-    <p>
-      Some examples (sorry about the colors, did not make the syntax highlighter
-      to work for JSX):
-    </p>
-
     <SyntaxHL language="javascript" style={docco}>
-      {`const { Grid, Cell } = makeGrid({ gutterH: '1rem', gutterV: '1rem' });
-
-return (
-    <Grid>
-      <Cell sm={6} lg={4}>Left</Cell>
-      <Cell sm={6} lg={4}>Middle</Cell>
-      <Cell sm={12} lg={4}>Right</Cell>
-    </Grid>
-);`}
-    </SyntaxHL>
-
-    <S.Grid>
-      <S.Cell sm={6} lg={4}>
-        <S.GridInner>Left</S.GridInner>
-      </S.Cell>
-      <S.Cell sm={6} lg={4}>
-        <S.GridInner>Middle</S.GridInner>
-      </S.Cell>
-      <S.Cell sm={12} lg={4}>
-        <S.GridInner>Right</S.GridInner>
-      </S.Cell>
-    </S.Grid>
-
-    <br />
-    <SyntaxHL language="javascript" style={docco}>
-      {`const { Grid, Cell } = makeGrid({
-    gutterH: '0.5rem',
-    gutterV: '0.5rem',
-    resolution: 20,
+      {`
+const theme = {
+  grid: {
+    resolution: 12,
     breakpoints: {
-        a: 1400,
-        b: 1200,
-        c: 1000,
-        d: 800,
-        e: 600,
+        xs: [null, 767], // max-width: 767
+        sm: [768, 991], // min-width: 768 and max-width: 991
+        md: [992, 1199], // min-width: 992 and max-width: 1199
+        lg: [1200, null],  // min-width: 1200
     },
-});
-
-return (
-    <Grid>
-      <Cell a={18} b={14} c={10} d={6} e={2}>
-          Left
-      </Cell>
-      <Cell a={2} b={6} c={10} d={14} e={18}>
-          Right
-      </Cell>
-      <Cell a={20}>
-          Center
-      </Cell>
-      <Cell a={2} b={6} c={10} d={14} e={18}>
-          Left
-      </Cell>
-      <Cell a={18} b={14} c={10} d={6} e={2}>
-          Right
-      </Cell>
-    </Grid>
-);`}
-    </SyntaxHL>
-
-    <S.GridAlt>
-      <S.CellAlt a={18} b={14} c={10} d={6} e={2}>
-        <S.GridInner>Left</S.GridInner>
-      </S.CellAlt>
-      <S.CellAlt a={2} b={6} c={10} d={14} e={18}>
-        <S.GridInner>Right</S.GridInner>
-      </S.CellAlt>
-      <S.CellAlt a={20}>
-        <S.GridInner>Center</S.GridInner>
-      </S.CellAlt>
-      <S.CellAlt a={2} b={6} c={10} d={14} e={18}>
-        <S.GridInner>Left</S.GridInner>
-      </S.CellAlt>
-      <S.CellAlt a={18} b={14} c={10} d={6} e={2}>
-        <S.GridInner>Right</S.GridInner>
-      </S.CellAlt>
-    </S.GridAlt>
-
-    <br />
-    <SyntaxHL language="javascript" style={docco}>
-      {`const { Grid, Cell } = makeGrid({ gutterH: '1rem', gutterV: '1rem' });
-
-return (
-    <Grid>
-      <Cell>Left</Cell>
-      <Cell>Middle</Cell>
-      <Cell>Right</Cell>
-    </Grid>
-);`}
-    </SyntaxHL>
-
-    <S.Grid>
-      <S.Cell>
-        <S.GridInner>Left</S.GridInner>
-      </S.Cell>
-      <S.Cell>
-        <S.GridInner>Middle</S.GridInner>
-      </S.Cell>
-      <S.Cell>
-        <S.GridInner>Right</S.GridInner>
-      </S.Cell>
-    </S.Grid>
-
-    <br />
-    <p>
-      The default options for <code>makeGrid()</code> are aligned with the
-      system of Bootstrap (breakpoints are set in pixels):
-    </p>
-    <SyntaxHL language="javascript" style={docco}>
-      {`{
-  resolution: 12,
-  gutterH: 0,
-  gutterV: 0,
-  breakpoints: {
-    xl: 1200,
-    lg: 992,
-    md: 768,
-    sm: 576,
   },
-}`}
-    </SyntaxHL>
-
-    <p>
-      I can also offer a mixin to create grids (which are slightly more
-      powerful, because they allow to set responsive gutters):
-    </p>
-
-    <SyntaxHL language="javascript" style={docco}>
-      {`const theme = {
-    grid: {
-        resolution: 20,
-        breakpoints: {
-            a: 1400,
-            b: 1200,
-            c: 1000,
-            d: 800,
-            e: 600,
-        },
-    },
 };
 
-export const Grid = styled.div\`
-  \${props => grid({...props, config: theme.grid})}
-\`;
+const Grid = styled.div\`
+  \${grid({gutters: {all: '1rem', md: '0.7rem', sm: '0.5rem', xs: '0.2rem'}}, theme.grid)}
+\`
 
-export const Cell = styled.div\`
-  \${props => cell({...props, config: theme.grid})}
-\`;
+const Cell = styled.div\`
+    \${cell({xs: 3, sm: 6, md: 9, lg: 12}, theme.grid)}
+\`
+
+const CellRev = styled.div\`
+    \${cell({xs: 9, sm: 6, md: 3, lg: 12}, theme.grid)}
+\`
 `}
     </SyntaxHL>
+
     <p>And then:</p>
     <SyntaxHL language="javascript" style={docco}>
-      {`<Grid gw-a="0.2rem" gw-b="0.5rem" gw-c="0.7rem" gw-d="1rem" gw-e="1.2rem">
-    <Cell a={18} b={14} c={10} d={6} e={2}>
-        Left
-    </Cell>
-    <Cell a={2} b={6} c={10} d={14} e={18}>
-        Right
-    </Cell>
+      {`<Grid>
+  <Cell>
+    Left
+  </Cell>
+  <CellRev>
+    Right
+  </CellRev>
+  <CellRev>
+    Left
+  </CellRev>
+  <Cell>
+    Right
+  </Cell>
 </Grid>
 `}
     </SyntaxHL>
 
-    <S.GridNew
-      gw-a="0.2rem"
-      gw-b="0.5rem"
-      gw-c="0.7rem"
-      gw-d="1rem"
-      gw-e="1.2rem"
-    >
-      <S.CellNew a={18} b={14} c={10} d={6} e={2}>
+    <S.Grid>
+      <S.Cell>
         <S.GridInner>Left</S.GridInner>
-      </S.CellNew>
-      <S.CellNew a={2} b={6} c={10} d={14} e={18}>
+      </S.Cell>
+      <S.CellRev>
         <S.GridInner>Right</S.GridInner>
-      </S.CellNew>
-    </S.GridNew>
+      </S.CellRev>
+      <S.CellRev>
+        <S.GridInner>Left</S.GridInner>
+      </S.CellRev>
+      <S.Cell>
+        <S.GridInner>Right</S.GridInner>
+      </S.Cell>
+    </S.Grid>
     <br />
-    <p>
-      Note, that <code>gw-[breakpoint]</code> and <code>gh-[breakpoint]</code>{" "}
-      stand for "horizontal" and "vertical" gutters respectively.
-    </p>
 
     <br />
     <h2>z-Index constants</h2>
@@ -622,6 +429,64 @@ export const Cell = styled.div\`
       </S.Hell>
     </S.Levels>
 
+    <h3>rectangle()</h3>
+    <p>
+      Sets height and width of the element to the specified values, and scales
+      it, if necessary.
+    </p>
+    <ul>
+      <li>The first argument stands for the vertical offset</li>
+      <li>The second one &mdash; guess</li>
+    </ul>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const Rect = styled.div\`
+  \${rectangle('10rem', '20rem', 0.5)}
+\`;`}
+    </SyntaxHL>
+    <p>Will produce a rectangle of 5rem x 10rem:</p>
+    <S.Rect />
+
+    <h3>centralColumn()</h3>
+    <p>
+      Creates a central column which is typically used in a simple one-column
+      design.
+    </p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const MainContainer = styled.div\`
+  \${centralColumn()}
+\`;`}
+    </SyntaxHL>
+
+    <h3>disabled()</h3>
+    <p>"Disables" an element on CSS-level.</p>
+    <p>Example:</p>
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const Disableabled = styled.div\`
+  \${props => props.disabled ? disabled() : ''}
+\`;`}
+    </SyntaxHL>
+    <S.Disabled disabled>I am a sad disabled button</S.Disabled>
+    <br />
+    <br />
+    <SyntaxHL language="javascript" style={docco}>
+      {`export const DisableabledForm = styled.div\`
+  \${props => props.disabled ? disabled(0.3) : ''}
+\`;`}
+    </SyntaxHL>
+    <S.DisabledForm>
+      <div>
+        You can't select me, I am disabled. Also, I am almost invisible, because
+        the <code>opacity</code> parameter was set to <code>0.3</code>
+      </div>
+      <button>This button cannot be clicked.</button>{" "}
+      <input
+        type="text"
+        value="This input can't be changed"
+        style={{ width: "300px" }}
+      />
+    </S.DisabledForm>
     <br />
     <h2>The Github repo</h2>
     <p>

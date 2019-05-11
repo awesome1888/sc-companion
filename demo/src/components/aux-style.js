@@ -205,59 +205,65 @@ export const TBC = styled.div`
   ${align("center", "center")}
   font-size: 1.5rem;
 `
+//
+// const GridSys = makeGrid({
+//   gutterH: "1rem",
+//   gutterV: "1rem",
+// })
+//
+// export const Grid = styled(GridSys.Grid)``
+//
+// export const Cell = styled(GridSys.Cell)``
+//
+// const GridSysAlt = makeGrid({
+//   gutterH: "0.5rem",
+//   gutterV: "0.5rem",
+//   resolution: 20,
+//   breakpoints: {
+//     a: 1400,
+//     b: 1200,
+//     c: 1000,
+//     d: 800,
+//     e: 600,
+//   },
+// })
+//
+// export const GridAlt = styled(GridSysAlt.Grid)``
+//
+// export const CellAlt = styled(GridSysAlt.Cell)``
 
-const GridSys = makeGrid({
-  gutterH: "1rem",
-  gutterV: "1rem",
-})
-
-export const Grid = styled(GridSys.Grid)``
-
-export const Cell = styled(GridSys.Cell)``
-
-const GridSysAlt = makeGrid({
-  gutterH: "0.5rem",
-  gutterV: "0.5rem",
-  resolution: 20,
-  breakpoints: {
-    a: 1400,
-    b: 1200,
-    c: 1000,
-    d: 800,
-    e: 600,
+const theme = {
+  grid: {
+    resolution: 12,
+    breakpoints: {
+      xs: [null, 767], // max-width: 767
+      sm: [768, 991], // min-width: 768 and max-width: 991
+      md: [992, 1199], // min-width: 992 and max-width: 1199
+      lg: [1200, null], // min-width: 1200
+    },
   },
-})
+}
 
-export const GridAlt = styled(GridSysAlt.Grid)``
+export const Grid = styled.div`
+  ${grid(
+    { gutters: { all: "1rem", md: "0.7rem", sm: "0.5rem", xs: "0.2rem" } },
+    theme.grid
+  )}
+`
 
-export const CellAlt = styled(GridSysAlt.Cell)``
+export const Cell = styled.div`
+  ${cell({ xs: 3, sm: 6, md: 9, lg: 12 }, theme.grid)}
+`
+
+export const CellRev = styled.div`
+  ${cell({ xs: 9, sm: 6, md: 3, lg: 12 }, theme.grid)}
+`
 
 export const GridInner = styled.div`
   border: 1px solid #6f2b9e;
   border-radius: 4px;
   padding: 1rem;
   height: 100%;
-`
-
-const theme = {
-  grid: {
-    resolution: 20,
-    breakpoints: {
-      a: 1400,
-      b: 1200,
-      c: 1000,
-      d: 800,
-      e: 600,
-    },
-  },
-}
-
-export const GridNew = styled.div`
-  ${props => grid({ ...props, config: theme.grid })}
-`
-
-export const CellNew = styled.div`
-  ${props => cell({ ...props, config: theme.grid })}
 `
 
 export const Levels = styled.div`

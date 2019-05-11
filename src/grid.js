@@ -1,170 +1,112 @@
-import React from 'react';
-import styled from 'styled-components';
 import { op } from './util';
 
-const makeConstraint = (width, gutterY, gutterX) => {
-    return `
-        flex-basis: ${width};
-        width: ${width};
-        padding-left: ${gutterX};
-        padding-right: ${gutterX};
-        padding-bottom: ${gutterY};
-    `;
-};
-
-const makeCell = (theme, props) => {
-    let result = '';
-
-    const resolution = theme.resolution;
-    const gutterH = theme.gutterHHalf;
-    const gutterV = theme.gutterV;
-
-    let first = true;
-    theme.bpIx.forEach(bp => {
-        const size = bp.key;
-        const value = bp.size;
-        if (size in props) {
-            const width = `${Math.floor((props[size] / resolution) * 1000) *
-                0.1}%`;
-            result += `
-                ${first ? '' : `@media screen and (max-width: ${value}px) {`}
-                    ${makeConstraint(width, gutterV, gutterH)}
-                ${first ? '' : '};'}
-            `;
-            first = false;
-        }
-    });
-
-    if (first) {
-        // still the first => no constraints specified, apply the default one
-        result += makeConstraint('100%', gutterV, gutterH);
-    }
-
-    return result;
-};
-
-export const makeGrid = (theme = null) => {
-    theme = theme || {};
-    theme.resolution = theme.resolution || 12;
-    theme.gutterH = theme.gutterH || 0;
-    theme.gutterV = theme.gutterV || 0;
-    theme.breakpoints = theme.breakpoints || {
-        xl: 1200,
-        lg: 992,
-        md: 768,
-        sm: 576,
-    };
-
-    theme = Object.assign({}, theme);
-
-    const ix = Object.keys(theme.breakpoints).map(key => ({
-        size: theme.breakpoints[key],
-        key,
-    }));
-    ix.sort((a, b) => {
-        if (a.size === b.size) {
-            return 0;
-        }
-
-        return a.size < b.size ? 1 : -1;
-    });
-    theme.bpIx = ix;
-
-    theme.gutterHHalf = op(theme.gutterH, x => x / 2);
-    theme.gutterVHalf = op(theme.gutterV, x => x / 2);
-
-    const gutterHHalfNeg = op(theme.gutterHHalf, x => x * -1);
-    const gutterVNeg = op(theme.gutterV, x => x * -1);
-
-    const Grid = styled.div`
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        ${theme.gutterHHalf
-            ? `margin-left: ${gutterHHalfNeg}; margin-right: ${gutterHHalfNeg};`
-            : ''}
-        ${theme.gutterVHalf ? `margin-bottom: ${gutterVNeg};` : ''}
-    `;
-
-    const Cell = styled.div`
-        ${props => makeCell(theme, props)}
-    `;
-
-    return { Grid, Cell };
-};
+const toHalf = x => x / 2;
+const negate = x => x * -1;
 
 const checkTheme = theme => {
-    theme = Object.assign({}, theme || {});
+    theme = theme || {};
     theme.resolution = theme.resolution || 12;
     theme.breakpoints = theme.breakpoints || {
-        xl: 1200,
-        lg: 992,
-        md: 768,
-        sm: 576,
+        xs: [null, 767], // max-width: 767
+        sm: [768, 991], // min-width: 768 and max-width: 991
+        md: [992, 1199], // min-width: 992 and max-width: 1199
+        lg: [1200, null], // min-width: 1200
     };
 
-    const ix = Object.keys(theme.breakpoints).map(key => ({
-        size: theme.breakpoints[key],
-        key,
-    }));
-    ix.sort((a, b) => {
-        if (a.size === b.size) {
-            return 0;
+    const bpMedia = {};
+    Object.keys(theme.breakpoints).forEach(bp => {
+        const item = theme.breakpoints[bp];
+        const range = [];
+        if (item[0]) {
+            range.push(`(min-width: ${item[0]}px)`);
         }
-
-        return a.size < b.size ? 1 : -1;
+        if (item[1]) {
+            range.push(`(max-width: ${item[1]}px)`);
+        }
+        bpMedia[bp] = range.join(' and ');
     });
-    theme.bpIx = ix;
+
+    theme.media = bpMedia;
 
     return theme;
 };
 
-export const grid = (props = {}) => {
-    let { config } = props;
-    let theme = checkTheme(config);
+export const grid = (config = {}, theme = {}) => {
+    theme = Object.assign({}, checkTheme(theme), config);
 
     let cssSelf = '';
     let cssChildren = '';
-    let firstW = true;
-    let firstH = true;
-    theme.bpIx.forEach(bp => {
-        const sizeHName = `gh-${bp.key}`;
-        const sizeWName = `gw-${bp.key}`;
-        const size = bp.size;
-        if (sizeWName in props) {
-            const gutter = props[sizeWName];
-            const gutterH = op(gutter, x => x / 2);
-            const gutterHNeg = op(gutterH, x => x * -1);
+
+    // gutters
+    const guttersH = theme.guttersH || theme.guttersY || theme.gutters;
+    const guttersW = theme.guttersW || theme.guttersX || theme.gutters;
+
+    if (guttersH || guttersW) {
+        if (guttersW && 'all' in guttersW) {
+            const gutter = guttersW.all;
+            const gutterHalf = op(gutter, toHalf);
+            const gutterHalfNeg = op(gutterHalf, negate);
             cssSelf += `
-                ${firstW ? '' : `@media screen and (max-width: ${size}px) {`}
-                    margin-left: ${gutterHNeg};
-                    margin-right: ${gutterHNeg};
-                ${firstW ? '' : '};'}
-            `;
+               margin-left: ${gutterHalfNeg};
+               margin-right: ${gutterHalfNeg};
+          `;
             cssChildren += `
-                ${firstW ? '' : `@media screen and (max-width: ${size}px) {`}
-                    padding-left: ${gutterH};
-                    padding-right: ${gutterH};
-                ${firstW ? '' : '};'}
-            `;
-            firstW = false;
+              padding-left: ${gutterHalf};
+              padding-right: ${gutterHalf};
+          `;
         }
-        if (sizeHName in props) {
-            const gutter = props[sizeHName];
-            const gutterNeg = op(gutter, x => x * -1);
+        if (guttersH && 'all' in guttersH) {
+            const gutter = guttersH.all;
+            const gutterNeg = op(gutter, negate);
             cssSelf += `
-                ${firstH ? '' : `@media screen and (max-width: ${size}px) {`}
+              margin-bottom: ${gutterNeg};
+          `;
+            cssChildren += `
+              padding-bottom: ${gutter};
+          `;
+        }
+
+        Object.keys(theme.breakpoints).forEach(bp => {
+            const media = theme.media[bp];
+
+            if (guttersW) {
+                if (bp in guttersW) {
+                    const gutter = guttersW[bp];
+                    const gutterHalf = op(gutter, toHalf);
+                    const gutterHalfNeg = op(gutterHalf, negate);
+                    cssSelf += `
+                @media screen and ${media} {
+                    margin-left: ${gutterHalfNeg};
+                    margin-right: ${gutterHalfNeg};
+                };
+            `;
+                    cssChildren += `
+                @media screen and ${media} {
+                    padding-left: ${gutterHalf};
+                    padding-right: ${gutterHalf};
+                }
+            `;
+                }
+            }
+
+            if (guttersH) {
+                if (bp in guttersH) {
+                    const gutter = guttersH[bp];
+                    const gutterNeg = op(gutter, negate);
+                    cssSelf += `
+                @media screen and ${media} {
                     margin-bottom: ${gutterNeg};
-                ${firstH ? '' : '};'}
+                }
             `;
-            cssChildren += `
-                ${firstH ? '' : `@media screen and (max-width: ${size}px) {`}
+                    cssChildren += `
+                @media screen and ${media} {
                     padding-bottom: ${gutter};
-                ${firstH ? '' : '};'}
+                }
             `;
-            firstH = false;
-        }
-    });
+                }
+            }
+        });
+    }
 
     return `
         display: flex;
@@ -184,34 +126,57 @@ const makeConstraintMix = width => {
     `;
 };
 
-export const cell = (props = {}) => {
-    let { config } = props;
-    let theme = checkTheme(config);
+const calcWidth = (width, resolution) =>
+    Math.floor((width / resolution) * 1000) * 0.1;
+
+export const cell = (config = {}, theme = {}) => {
+    theme = Object.assign({}, checkTheme(theme), config);
 
     let result = '';
 
     const resolution = theme.resolution;
 
-    let first = true;
-    theme.bpIx.forEach(bp => {
-        const size = bp.key;
-        const value = bp.size;
-        if (size in props) {
-            const width = `${Math.floor((props[size] / resolution) * 1000) *
-                0.1}%`;
-            result += `
-                ${first ? '' : `@media screen and (max-width: ${value}px) {`}
-                    ${makeConstraintMix(width)}
-                ${first ? '' : '};'}
-            `;
-            first = false;
+    Object.keys(theme.breakpoints).forEach(bp => {
+        const media = theme.media[bp];
+        let width = '';
+        if (bp in theme) {
+            // todo: cache, but measure the performance
+            width = makeConstraintMix(`${calcWidth(theme[bp], resolution)}%`);
+        } else {
+            width = makeConstraintMix(
+                'all' in theme
+                    ? `${calcWidth(theme.all, resolution)}%`
+                    : 'auto',
+            );
         }
+
+        result += `
+                @media screen and ${media} { ${width} }
+            `;
     });
 
-    if (first) {
-        // still the first => no constraints specified, apply the default one
-        result += makeConstraintMix('100%');
+    return result;
+};
+
+export const media = (rules = {}, theme = {}) => {
+    theme = checkTheme(theme);
+
+    let result = '';
+
+    if ('all' in rules) {
+        result += rules.all;
     }
+
+    Object.keys(theme.breakpoints).forEach(bp => {
+        const media = theme.media[bp];
+        if (bp in rules) {
+            result += `
+                @media screen and ${media} {
+                    ${rules[bp]}
+                }
+            `;
+        }
+    });
 
     return result;
 };
