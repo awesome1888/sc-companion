@@ -1,6 +1,6 @@
 {
     "name": "sc-companion",
-    "version": "2.1.6",
+    "version": "2.1.7",
     "description": "A set of mixins for Styled-Components",
     "main": "index.js",
     "browser": {
@@ -42,8 +42,8 @@
         "webpack-cli": "^3.2.3"
     },
     "peerDependencies": {
-        "styled-components": "x.x",
-        "react": "x.x"
+        "react": "x.x",
+        "styled-components": "x.x"
     },
     "dependencies": {},
     "husky": {
